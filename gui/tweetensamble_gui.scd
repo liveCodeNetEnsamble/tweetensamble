@@ -7,6 +7,7 @@
 //texto de entrada
 ~texto = TextView(~w.asView,Rect(20,20,600,120)).background_(Color.cyan).focus(true);
 ~texto.syntaxColorize;
+~texto.setFont(Font("Bitstream Charter",15,true,false),0,140);
 ~texto.string = "Escribe y evalua tu codigo aqui ...";
 ~texto.enterInterpretsSelection(true);//evalua el texto
 //cuenta de letras
@@ -20,22 +21,23 @@
 			["Copy your 140", Color.green, Color.black]
         ])
         .action_({|butt|
-		if(butt.value == 1, {
-            ~texto.select(0,139);//
-                });
 		if(butt.value == 0, {
-			("echo" + ~texto.selectedText + " | xclip ").unixCmd;
-			~texto.string_("xclip".unixCmdGetStdOut, ~texto.selectionStart,~texto.selectionSize);
+			("echo " + ~texto.selectedString + " | xsel ").unixCmd;
+			~texto.string_("xsel".unixCmdGetStdOut, ~texto.selectionStart,~texto.selectionSize);
+                });
+		if(butt.value == 1, {
+            ~texto.select(0,140);//
 		});
 	});
 //acciones
 ~texto.keyUpAction_({|view,chr,mod,uni,key|
 	//~texto.string.size.post;
 	if(~texto.string.size > 140,{
-		~texto.setFont(Font("Courier",11),140,5000);
-		~texto.setStringColor(Color.red,140,5000);//error + 140
-		~numtxt.background_(Color.red);//error
+		~texto.setFont(Font("Bitstream Charter",9,false,true),140,140*2);
+		~texto.setStringColor(Color.red,140,140*2);//error + 140
+		~numtxt.background_(Color.red);//error + 140
 	});
+//
 	~numtxt.value = ~texto.string.size;
 //
 	if(~texto.string.size <= 140,{
@@ -45,6 +47,7 @@
 });
 
 );
+// Font.availableFonts
 /*
 ~texto.selectedString// para poder compartir texto seleccionado
 ~texto.setStringColor(Color.cyan,0,10);//colorizar algunas partes importantes del texto
