@@ -6,15 +6,24 @@
 ~w = Window("TweetEnsamble - Collaborative sctweets",Rect.aboutPoint(Window.screenBounds.center,320,220),false,scroll:false).front;
 //texto de entrada
 ~texto = TextView(~w.asView,Rect(20,20,600,120)).background_(Color.cyan).focus(true);
-~texto.string = "Escribe y evalua tu codigo aqui ....";
 ~texto.syntaxColorize;
+~texto.string = "Escribe y evalua tu codigo aqui ...";
 ~texto.enterInterpretsSelection(true);//evalua el texto
-//~texto.string.onResize = {~numtxt.value = ~texto.string.size};
+~texto.keyUpAction_({|view,chr,mod,uni,key|
+	~texto.string.size.post;
+	if(~texto.string.size > 140,{
+		~texto.setFont(Font("Courier",12),140,5000);
+		~texto.setStringColor(Color.red,140,5000);
+	});
+	~numtxt.value = ~texto.string.size;
+	//[view,mod, uni, key].postln;
+});
 //cuenta de letras
-~numtxt = NumberBox(~w,Rect(585,145,33,20));
+~numtxt = NumberBox(~w,Rect(587,120,33,20));
 ~numtxt.background_(Color.green);
-~numtxt.value = ~texto.string.size;
-)
+
+);
+
 /*
 ~numtxt.increment(100);//aumentara conforme se escriba
 ~numtxt.background_(Color.red);//fondo del contador de letras + 140 char
