@@ -14,19 +14,23 @@
 	if(~texto.string.size > 140,{
 		~texto.setFont(Font("Courier",12),140,5000);
 		~texto.setStringColor(Color.red,140,5000);
+		~numtxt.background_(Color.red);//fondo del contador de letras + 140 char
 	});
 	~numtxt.value = ~texto.string.size;
+//
+	if(~texto.string.size < 140,{
+		~numtxt.background_(Color.green);
+	});
 	//[view,mod, uni, key].postln;
 });
 //cuenta de letras
 ~numtxt = NumberBox(~w,Rect(587,120,33,20));
-~numtxt.background_(Color.green);
+
 
 );
 
 /*
 ~numtxt.increment(100);//aumentara conforme se escriba
-~numtxt.background_(Color.red);//fondo del contador de letras + 140 char
 ~texto.selectedString// para poder compartir texto seleccionado
 ~texto.setStringColor(Color.cyan,0,10);//colorizar algunas partes importantes del texto
 ~texto.setFont(Font("Courier",12),140,5000);
