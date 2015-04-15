@@ -9,7 +9,7 @@
 ~texto.string = "Escribe y evalua tu codigo aqui ....";
 ~texto.syntaxColorize;
 ~texto.enterInterpretsSelection(true);//evalua el texto
-~texto.string.onResize = {~numtxt.value = ~texto.string.size};
+//~texto.string.onResize = {~numtxt.value = ~texto.string.size};
 //cuenta de letras
 ~numtxt = NumberBox(~w,Rect(585,145,33,20));
 ~numtxt.background_(Color.green);
