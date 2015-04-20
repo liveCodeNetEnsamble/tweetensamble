@@ -17,14 +17,21 @@
 //botones
 ~selectall = Button(~w,Rect(507,150,113,20))
         .states_([
-            ["Select your 140", Color.cyan, Color.black],
-			["Copy your 140", Color.green, Color.black]
+            ["Select text", Color.cyan, Color.black],
+			["Save to file", Color.green, Color.black]
         ])
         .action_({|butt|
 		if(butt.value == 0, {
-			("echo " + ~texto.selectedString + " | xsel -selection c").unixCmd;
-			//~texto.string_("xsel".unixCmdGetStdOut, ~texto.selectionStart,~texto.selectionSize);
-                });
+			if(~texto.selectedString != nil,{
+				a=File(~url ++ "sctweets/MySCTweet" ++ ~fileit ++ ".scd" ,"w");
+				a.write("//done with tweetwensabmble by " ++ ~miusuario ++ "\n" ++ ~texto.selectedString ++ "\n" ++ "//2015");
+				a.close;
+				~fileit = ~fileit+1;
+				"si guardo".postc;
+				//("echo " + ~texto.selectedString + " | xsel -selection c").unixCmd;
+				//~texto.string_("xsel".unixCmdGetStdOut, ~texto.selectionStart,~texto.selectionSize);
+				},{butt.value = 1});
+            });
 		if(butt.value == 1, {
             ~texto.select(0,140);//
 		});

@@ -1,18 +1,25 @@
 //LiveCodeNet Ensamble
 //crea, coolabora, comparte tus SCtweets
 //variables globales e inicializacion
-/////////al iniciar//////////
-8.do{|i=1|
+/////////al iniciar://////////
+11.do{|i=1|
 	var x = (i/16);
-	play{EnvGen.ar(Env.perc(0.01,0.05+x),doneAction:2)*LFPulse.ar(i*200,0.05,0.5,0.05)!2};
-	"Tweetensamble es una herramienta para crear SCTweets coolaborativos".post;
+	play{EnvGen.ar(Env.perc(0.01,0.05+x),doneAction:2)*LFPulse.ar(i*200,0.05,0.5,0.01)!2};
+	if( i>=10,{" ...Tweetensamble is a tool to create coolaborative SCTweets".post;},
+		{"Tweetensamble is a tool to create coolaborative SCTweets".scramble.post;}
+	);
 	i+1;
 	0.125+x.wait;
 };
-//
+/////////////////////
+//variables globales
+////////////////////
 //mi variable
 ~miusuario = nil;
 //variable para compartir
 ~comparte = nil;
-//
+//iterador
+~fileit = 0 ;
+////////terminan variables globales/////////////
+//aqui las rutas de los archivos ligados al arranque
 (~url ++ "gui/tweetensamble_gui.scd").load;

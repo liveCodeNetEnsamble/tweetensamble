@@ -1,11 +1,14 @@
 //LiveCodeNet Ensamble
 //crea, coolabora, comparte tus SCtweets
 //
+//Evalua la siguiente funcion:
 (
 s.waitForBoot {
-///////////configura la ruta del directorio de la aplicacion///////////
+///////////Solo configura la ruta del directorio de 'tweetensamble'///////////
 	~url="/home/josecaos/Documents/Repos/tweetensamble/";
+	////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////
+	////////////no editar/////////////////////////////////////////////////
 	(~url ++ "assets/load.scd").load;
-}
-)
-Help.gui;
+	}
+);
