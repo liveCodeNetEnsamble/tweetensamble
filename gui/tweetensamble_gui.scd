@@ -22,8 +22,8 @@
         ])
         .action_({|butt|
 		if(butt.value == 0, {
-			("echo " + ~texto.selectedString + " | xsel ").unixCmd;
-			~texto.string_("xsel".unixCmdGetStdOut, ~texto.selectionStart,~texto.selectionSize);
+			("echo " + ~texto.selectedString + " | xsel -selection c").unixCmd;
+			//~texto.string_("xsel".unixCmdGetStdOut, ~texto.selectionStart,~texto.selectionSize);
                 });
 		if(butt.value == 1, {
             ~texto.select(0,140);//
@@ -56,4 +56,4 @@
 ~texto.setString("\nA string de reemplazo\n",12,6);//este para cambiar el texto por el recibido
 */
 //
-Help.gui;
+//Help.gui;

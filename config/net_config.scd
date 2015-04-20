@@ -1,5 +1,17 @@
 //LiveCodeNet Ensamble
 //crea, coolabora, comparte tus SCtweets
+/////
+/*
+twitter IPs
+199.59.148.82
+199.59.150.7
+199.59.149.198
+199.59.150.39
+*/
+//para desplegar el contenido del SCnavegador
+~turl = NetAddr("");//direccion para logear y postear
+~uurl = "";//url de usuario
+///
 //acustweet History + NetAddr
 ~q = ();
 NetAddr.broadcastFlag = true;
@@ -13,7 +25,7 @@ NetAddr.broadcastFlag = true;
 }
 ////////////////////
 History.start;
-History.makeWin;
+//History.makeWin;
 OSCdef(\hist, { |msg|
 History.enter(msg[2].asString,msg[1]);
 }, \hist).fix;
