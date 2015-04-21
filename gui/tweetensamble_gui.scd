@@ -12,13 +12,20 @@
 ~texto.enterInterpretsSelection(true);//evalua el texto
 //nombre usuario
 ~usrlabel = StaticText(~w,Rect(20,150,200,12)).string = "User Name:";
-~usrlabel.background = Color.cyan;
-~usr = TextField(~w,Rect(20,162,200,20));
-~usr.action = {|field| ~miusuario = field.value; ~miusuario.postcln};
+~usrlabel.background = Color.black;
+~usrlabel.stringColor = Color.cyan;
+~usr = TextField(~w,Rect(20,162,200,20)).background = Color.cyan;
 ///lista de usuarios
 ~lstlabel = StaticText(~w,Rect(20,182,200,12)).string = "Active users list:";
-~lstlabel.background = Color.cyan;
-~usrlist = TextView(~w,Rect(20,202,200,220)).background_(Color.cyan).focus(false);
+~lstlabel.background = Color.black;
+~lstlabel.stringColor = Color.cyan;
+~usrlist = TextView(~w,Rect(20,194,200,230)).background_(Color.cyan).focus(false);
+~usrlist.autohidesScrollers_(true);
+~usrlist.editable_(false);
+//accion nombre usuario
+~usr.action = {|field| ~miusuario = field.value;
+	~usrlist.setString(~miusuario.value,0,~miusuario.value.size);
+};
 //botones
 ~selectall = Button(~w,Rect(507,150,113,20))
         .states_([
