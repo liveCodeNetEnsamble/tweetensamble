@@ -16,17 +16,26 @@
 ~usrlabel.stringColor = Color.cyan;
 ~usr = TextField(~w,Rect(20,162,200,20)).background = Color.cyan;
 ///lista de usuarios
-~lstlabel = StaticText(~w,Rect(20,182,200,12)).string = "Active users list:";
+~lstlabel = StaticText(~w,Rect(20,187,200,12)).string = "Active users list:";
 ~lstlabel.background = Color.black;
 ~lstlabel.stringColor = Color.cyan;
-~usrlist = TextView(~w,Rect(20,194,200,230)).background_(Color.cyan).focus(false);
+~usrlist = TextView(~w,Rect(20,199,200,180)).background_(Color.cyan).focus(false);
 ~usrlist.autohidesScrollers_(true);
 ~usrlist.editable_(false);
 //accion nombre usuario
 ~usr.action = {|field| ~miusuario = field.value;
-	~usrlist.setString(~miusuario.value,0,~miusuario.value.size);
+	~usrlist.setString(~miusuario ++ "\n"/*enter para enlistar usuarios en red*/,0,~miusuario.size);
+	~usrlist.setStringColor(Color.magenta,0,~miusuario.size);
 };
 //botones
+~conecta = Button(~w,Rect(20,385,200,40));
+~conecta.states_([
+            ["Connect to ensamble", Color.black, Color.cyan]
+        ]);
+~conecta.action_({|butt|
+	5.do{"este boton conectara a la red local para enviar y buscar usuarios".postln};
+	~usr.string = "";
+});
 ~selectall = Button(~w,Rect(507,150,113,20))
         .states_([
             ["Select text", Color.cyan, Color.black],
