@@ -6,14 +6,19 @@
 ~w = Window("TweetEnsamble - Collaborative sctweets",Rect.aboutPoint(Window.screenBounds.center,320,220),false,scroll:false).front;
 //texto de entrada
 ~texto = TextView(~w.asView,Rect(20,20,600,120)).background_(Color.cyan).focus(true);
-~texto.syntaxColorize;
 ~texto.setFont(Font("Bitstream Charter",15,true,false),0,140);
 ~texto.string = "Escribe y evalua tu codigo aqui ...";
+~texto.syntaxColorize(true);
 ~texto.enterInterpretsSelection(true);//evalua el texto
-//cuenta de letras
-~numtxt = NumberBox(~w,Rect(587,120,33,20));
-~numtxt.background_(Color.green);
-~numtxt.value = ~texto.string.size;
+//nombre usuario
+~usrlabel = StaticText(~w,Rect(20,150,200,12)).string = "User Name:";
+~usrlabel.background = Color.cyan;
+~usr = TextField(~w,Rect(20,162,200,20));
+~usr.action = {|field| ~miusuario = field.value; ~miusuario.postcln};
+///lista de usuarios
+~lstlabel = StaticText(~w,Rect(20,182,200,12)).string = "Active users list:";
+~lstlabel.background = Color.cyan;
+~usrlist = TextView(~w,Rect(20,202,200,220)).background_(Color.cyan).focus(false);
 //botones
 ~selectall = Button(~w,Rect(507,150,113,20))
         .states_([
@@ -22,20 +27,22 @@
         ])
         .action_({|butt|
 		if(butt.value == 0, {
-			if(~texto.selectedString != nil,{
-				a=File(~url ++ "sctweets/MySCTweet" ++ ~fileit ++ ".scd" ,"w");
-				a.write("//done with tweetwensabmble by " ++ ~miusuario ++ "\n" ++ ~texto.selectedString ++ "\n" ++ "//2015");
-				a.close;
-				~fileit = ~fileit+1;
-				"si guardo".postc;
-				//("echo " + ~texto.selectedString + " | xsel -selection c").unixCmd;
-				//~texto.string_("xsel".unixCmdGetStdOut, ~texto.selectionStart,~texto.selectionSize);
-				},{butt.value = 1});
-            });
+			~texto.select(0,140);//
+			n=~url ++ "sctweets/MySCTweet" ++ ~fileit ++ ".scd";
+			a=File(n,"w");
+			a.write("//done with tweetwensamble by " ++ ~miusuario ++ "\n" ++ ~texto.selectedString ++ "\n" ++ "//2015");
+			a.close;
+			~fileit = ~fileit+1;
+			11.do{("The File has been saved to: " ++ n).inform};
+        });
 		if(butt.value == 1, {
             ~texto.select(0,140);//
 		});
 	});
+//cuenta de letras
+~numtxt = NumberBox(~w,Rect(587,120,33,20));
+~numtxt.background_(Color.green);
+~numtxt.value = ~texto.string.size;
 //acciones
 ~texto.keyUpAction_({|view,chr,mod,uni,key|
 	//~texto.string.size.post;
@@ -52,14 +59,11 @@
 	});
 	//[view,mod, uni, key].postln;
 });
-
+//
 );
 // Font.availableFonts
 /*
-~texto.selectedString// para poder compartir texto seleccionado
 ~texto.setStringColor(Color.cyan,0,10);//colorizar algunas partes importantes del texto
-~texto.setFont(Font("Courier",12),140,5000);
-~texto.setStringColor(Color.red,140,5000);// para colorizar + de 140 caracteres
 ~texto.setString("\nA string de reemplazo\n",12,6);//este para cambiar el texto por el recibido
 */
 //
