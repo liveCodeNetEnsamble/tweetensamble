@@ -16,6 +16,7 @@
 ////////////////////
 //iteradores
 ~fileit = 0 ;//guarda archivos con distinto nombre
+~msgit = 0;//llena array de usuarios
 //ususarios
 ~numusr = 4;//numero de usuarios
 ~miusuario = nil;//mi variable

@@ -7,7 +7,7 @@
 //texto de entrada
 ~texto = TextView(~w.asView,Rect(20,20,600,120)).background_(Color.cyan).focus(true);
 ~texto.setFont(Font("Bitstream Charter",15,true,false),0,140);
-~texto.string = "Escribe y evalua tu codigo aqui ...";
+~texto.string = "Write, share and evaluate SCtweets here ...";
 ~texto.syntaxColorize(true);
 ~texto.enterInterpretsSelection(true);//evalua el texto
 //nombre usuario
@@ -15,6 +15,11 @@
 ~usrlabel.background = Color.black;
 ~usrlabel.stringColor = Color.cyan;
 ~usr = TextField(~w,Rect(20,162,200,20)).background = Color.cyan;
+~usr.action = {|field|
+	~miusuario = field.value;
+	4.do{"User has been set, now press connect".inform};
+	~usr.string = "";
+};
 ///lista de usuarios
 ~lstlabel = StaticText(~w,Rect(20,187,200,12)).string = "Ensamble users list:";
 ~lstlabel.background = Color.black;
@@ -31,14 +36,10 @@
 ~conecta.action_({|butt|
 	if(~miusuario !=nil,{
 		~loopback.sendMsg("/ensamble",~miusuario);//manda tu nombre a los demas
-	},{8.do{"Must set a username before connection".warn};~conecta.value = 0});
-	//accion nombre usuario
-	~usr.action = {|field|
-		~miusuario = field.value;
-		~usrlist.setString(~miusuario ++ "\n" ++ ~uid.join ++ "\n",0);
+		//accion nombre usuario
+		~usrlist.setString(~miusuario ++ "\n" ++ ~uid.join("\n"),0);
 		~usrlist.setStringColor(Color.magenta,0,~miusuario.size);
-	};
-	//~usr.string = "";
+	},{8.do{"Must set a username before connection".warn};~conecta.value = 0});
 });
 //
 ~labelbut = StaticText(~w,Rect(507,150,113,12)).string_("Text to Users");
