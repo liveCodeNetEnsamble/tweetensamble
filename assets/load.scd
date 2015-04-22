@@ -14,17 +14,19 @@
 /////////////////////
 //variables globales
 ////////////////////
-//mi variable
-~miusuario = nil;
-//numero de usuarios
-~numusr = 4;
-//variable para compartir
-~comparte = nil;
-//iterador
-~fileit = 0 ;
+//iteradores
+~fileit = 0 ;//guarda archivos con distinto nombre
+//ususarios
+~numusr = 4;//numero de usuarios
+~miusuario = nil;//mi variable
+~uid = Array.newClear(~numusr);//lista de usuarios
+~comparte = nil;//variable para compartir
 //conexion local
-~n = ();
-~puerto=57120;
+~n = ();//array de netaddrs usuarios
+~puerto=57120;//puerto base
+~netall;//red de todos
+~turl;//conexion a twitter
+~uurl = [];//array usuarios
 ////////terminan variables globales/////////////
 //aqui las rutas de los archivos ligados al arranque
 (~url ++ "gui/tweetensamble_gui.scd").load;

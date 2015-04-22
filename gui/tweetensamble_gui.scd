@@ -22,24 +22,50 @@
 ~usrlist = TextView(~w,Rect(20,199,200,180)).background_(Color.cyan).focus(false);
 ~usrlist.autohidesScrollers_(true);
 ~usrlist.editable_(false);
-//accion nombre usuario
-~usr.action = {|field| ~miusuario = field.value;
-	~usrlist.setString(~miusuario ++ "\n"/*enter para enlistar usuarios en red*/,0,~miusuario.size);
-	~usrlist.setStringColor(Color.magenta,0,~miusuario.size);
-};
 //botones
 ~conecta = Button(~w,Rect(20,385,200,40));
 ~conecta.states_([
-            ["Connect to ensamble", Color.black, Color.cyan]
+            ["Connect to ensamble", Color.black, Color.cyan],
+				["Disconnect from ensamble", Color.cyan, Color.black]
         ]);
 ~conecta.action_({|butt|
-	5.do{"este boton conectara a la red local para enviar y buscar usuarios".postln};
-	~usr.string = "";
+	if(~miusuario !=nil,{
+		~loopback.sendMsg("/ensamble",~miusuario);//manda tu nombre a los demas
+	},{8.do{"Must set a username before connection".warn};~conecta.value = 0});
+	//accion nombre usuario
+	~usr.action = {|field|
+		~miusuario = field.value;
+		~usrlist.setString(~miusuario ++ "\n" ++ ~uid.join ++ "\n",0);
+		~usrlist.setStringColor(Color.magenta,0,~miusuario.size);
+	};
+	//~usr.string = "";
 });
-~selectall = Button(~w,Rect(507,150,113,20))
+//
+~labelbut = StaticText(~w,Rect(507,150,113,12)).string_("Text to Users");
+~labelbut.background = Color.black;
+~labelbut.stringColor = Color.cyan;
+~selectsend = Button(~w,Rect(507,162,113,20))
         .states_([
-            ["Select text", Color.cyan, Color.black],
-			["Save to file", Color.green, Color.black]
+            ["Select text 140", Color.black, Color.cyan],
+			["Send to all", Color.black, Color.green]
+        ])
+        .action_({|butt|
+		if(butt.value == 0, {
+			~texto.select(0,140);//
+			~loopback.sendMsg("/ensamble",~miusuario);
+        });
+		if(butt.value == 1, {
+            ~texto.select(0,140);//
+		});
+	});
+//
+~labelbut2 = StaticText(~w,Rect(507,185,113,12)).string_("Text to File");
+~labelbut2.background = Color.black;
+~labelbut2.stringColor = Color.cyan;
+~selectsave = Button(~w,Rect(507,197,113,20))
+        .states_([
+            ["Select text 140", Color.black, Color.cyan],
+			["Save to file", Color.black, Color.green]
         ])
         .action_({|butt|
 		if(butt.value == 0, {
@@ -49,12 +75,13 @@
 			a.write("//done with tweetwensamble by " ++ ~miusuario ++ "\n" ++ ~texto.selectedString ++ "\n" ++ "//2015");
 			a.close;
 			~fileit = ~fileit+1;
-			11.do{("The File has been saved to: " ++ n).inform};
+			11.do{("The Selection has been saved to: " ++ n).inform};
         });
 		if(butt.value == 1, {
             ~texto.select(0,140);//
 		});
 	});
+if(~texto.focus != true, {~selectsave.value = 0});//regresar boton a estado 0
 //cuenta de letras
 ~numtxt = NumberBox(~w,Rect(587,120,33,20));
 ~numtxt.background_(Color.green);
