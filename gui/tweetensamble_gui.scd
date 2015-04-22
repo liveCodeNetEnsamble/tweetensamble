@@ -31,17 +31,27 @@
 ~conecta = Button(~w,Rect(20,385,200,40));
 ~conecta.states_([
             ["Connect to ensamble", Color.black, Color.cyan],
-				["Disconnect from ensamble", Color.cyan, Color.black]
+				["Disconnect to refresh list", Color.cyan, Color.black]
         ]);
 ~conecta.action_({|butt|
-	if(~miusuario !=nil,{
-		~loopback.sendMsg("/ensamble",~miusuario);//manda tu nombre a los demas
-		//accion nombre usuario
-		~usrlist.setString(~miusuario ++ "\n" ++ ~uid.join("\n"),0);
-		~usrlist.setStringColor(Color.magenta,0,~miusuario.size);
-	},{8.do{"Must set a username before connection".warn};~conecta.value = 0});
+	if(butt.value == 0, {
+		~usrlist.string  = "";
+		8.do{"Refreshing ensamble list".warn};
+		~loopback.sendMsg("/ensamble","");
+		//~usrlist.setString(~miusuario ++ "\n" ++ ~uid.join("\n"),0);
+		//~conecta.value = 0;
+	});
+	if(butt.value == 1, {
+		if(~miusuario !=nil,{
+			~loopback.sendMsg("/ensamble",~miusuario);//manda tu nombre a los demas
+			//accion nombre usuario
+			~usrlist.setString(~miusuario ++ "\n" ++ ~uid.join("\n"),0);
+			~usrlist.setStringColor(Color.magenta,0,~miusuario.size);
+		},{8.do{"Must set a username before connection".warn};~conecta.value = 0});
+	});
 });
 //
+~conecta.value.postln;
 ~labelbut = StaticText(~w,Rect(507,150,113,12)).string_("Text to Users");
 ~labelbut.background = Color.black;
 ~labelbut.stringColor = Color.cyan;
