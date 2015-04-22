@@ -16,7 +16,7 @@
 ~usrlabel.stringColor = Color.cyan;
 ~usr = TextField(~w,Rect(20,162,200,20)).background = Color.cyan;
 ///lista de usuarios
-~lstlabel = StaticText(~w,Rect(20,187,200,12)).string = "Active users list:";
+~lstlabel = StaticText(~w,Rect(20,187,200,12)).string = "Ensamble users list:";
 ~lstlabel.background = Color.black;
 ~lstlabel.stringColor = Color.cyan;
 ~usrlist = TextView(~w,Rect(20,199,200,180)).background_(Color.cyan).focus(false);

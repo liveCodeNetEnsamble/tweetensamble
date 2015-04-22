@@ -16,10 +16,16 @@
 ////////////////////
 //mi variable
 ~miusuario = nil;
+//numero de usuarios
+~numusr = 4;
 //variable para compartir
 ~comparte = nil;
 //iterador
 ~fileit = 0 ;
+//conexion local
+~n = ();
+~puerto=57120;
 ////////terminan variables globales/////////////
 //aqui las rutas de los archivos ligados al arranque
 (~url ++ "gui/tweetensamble_gui.scd").load;
+(~url ++ "config/net_config.scd").load;
