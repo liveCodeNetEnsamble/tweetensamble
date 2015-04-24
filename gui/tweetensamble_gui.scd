@@ -11,13 +11,13 @@
 ~texto.syntaxColorize(true);
 ~texto.enterInterpretsSelection(true);//evalua el texto
 //nombre usuario
-~usrlabel = StaticText(~w,Rect(20,150,200,12)).string = "User Name:";
+~usrlabel = StaticText(~w,Rect(20,150,200,12)).string = "User Name: (press enter)";
 ~usrlabel.background = Color.black;
 ~usrlabel.stringColor = Color.cyan;
 ~usr = TextField(~w,Rect(20,162,200,20)).background = Color.cyan;
 ~usr.action = {|field|
 	~miusuario = field.value;
-	4.do{"User has been set, now press connect".inform};
+	4.do{"User has been set, now press 'connect to Ensamble'".inform};
 	~usr.string = "";
 };
 ///lista de usuarios
@@ -51,7 +51,6 @@
 	});
 });
 //
-~conecta.value.postln;
 ~labelbut = StaticText(~w,Rect(507,150,113,12)).string_("Text to Users");
 ~labelbut.background = Color.black;
 ~labelbut.stringColor = Color.cyan;
