@@ -18,7 +18,7 @@
 ~fileit = 0 ;//guarda archivos con distinto nombre
 ~msgit = 0;//llena array de usuarios
 //ususarios
-~numusr = 4;//numero de usuarios
+~numusr = 4;//numero de usuarios,localhost siempre es index 0
 ~miusuario = nil;//mi variable
 ~uid = Array.newClear(~numusr);//lista de usuarios
 ~comparte = nil;//variable para compartir

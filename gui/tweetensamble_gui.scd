@@ -6,18 +6,18 @@
 ~w = Window("TweetEnsamble - Collaborative sctweets",Rect.aboutPoint(Window.screenBounds.center,320,220),false,scroll:false).front;
 //texto de entrada
 ~texto = TextView(~w.asView,Rect(20,20,600,120)).background_(Color.cyan).focus(true);
-~texto.setFont(Font("Bitstream Charter",15,true,false),0,140);
+~texto.setFont(Font("Bitstream Charter",24,true,false),0,140);
 ~texto.string = "Write, share and evaluate SCtweets here ...";
 ~texto.syntaxColorize(true);
 ~texto.enterInterpretsSelection(true);//evalua el texto
 //nombre usuario
-~usrlabel = StaticText(~w,Rect(20,150,200,12)).string = "User Name: (press enter)";
+~usrlabel = StaticText(~w,Rect(20,150,200,12)).string = "User Name:";
 ~usrlabel.background = Color.black;
 ~usrlabel.stringColor = Color.cyan;
 ~usr = TextField(~w,Rect(20,162,200,20)).background = Color.cyan;
 ~usr.action = {|field|
 	~miusuario = field.value;
-	4.do{"User has been set, now press 'connect to Ensamble'".inform};
+	4.do{"User has been set, now press connect".inform};
 	~usr.string = "";
 };
 ///lista de usuarios
@@ -36,7 +36,7 @@
 ~conecta.action_({|butt|
 	if(butt.value == 0, {
 		~usrlist.string  = "";
-		8.do{"Refreshing ensamble list".warn};
+		11.do{"Refreshing ensamble list".warn};
 		~loopback.sendMsg("/ensamble","");
 		//~usrlist.setString(~miusuario ++ "\n" ++ ~uid.join("\n"),0);
 		//~conecta.value = 0;
@@ -47,16 +47,17 @@
 			//accion nombre usuario
 			~usrlist.setString(~miusuario ++ "\n" ++ ~uid.join("\n"),0);
 			~usrlist.setStringColor(Color.magenta,0,~miusuario.size);
-		},{8.do{"Must set a username before connection".warn};~conecta.value = 0});
+		},{11.do{"Must set a username before connection".warn};~conecta.value = 0});
 	});
 });
 //
+// ~conecta.value.postln;
 ~labelbut = StaticText(~w,Rect(507,150,113,12)).string_("Text to Users");
 ~labelbut.background = Color.black;
 ~labelbut.stringColor = Color.cyan;
 ~selectsend = Button(~w,Rect(507,162,113,20))
         .states_([
-            ["Select text 140", Color.black, Color.cyan],
+            ["Select 140 chars", Color.black, Color.cyan],
 			["Send to all", Color.black, Color.green]
         ])
         .action_({|butt|
@@ -74,24 +75,23 @@
 ~labelbut2.stringColor = Color.cyan;
 ~selectsave = Button(~w,Rect(507,197,113,20))
         .states_([
-            ["Select text 140", Color.black, Color.cyan],
+            ["Select 140 chars", Color.black, Color.cyan],
 			["Save to file", Color.black, Color.green]
         ])
         .action_({|butt|
 		if(butt.value == 0, {
-			~texto.select(0,140);//
+			~texto.select(0,140);//por si el texto se deselecciona antes de enviar
 			n=~url ++ "sctweets/MySCTweet" ++ ~fileit ++ ".scd";
 			a=File(n,"w");
 			a.write("//done with tweetwensamble by " ++ ~miusuario ++ "\n" ++ ~texto.selectedString ++ "\n" ++ "//2015");
 			a.close;
 			~fileit = ~fileit+1;
 			11.do{("The Selection has been saved to: " ++ n).inform};
-        });
+	});
 		if(butt.value == 1, {
             ~texto.select(0,140);//
 		});
 	});
-if(~texto.focus != true, {~selectsave.value = 0});//regresar boton a estado 0
 //cuenta de letras
 ~numtxt = NumberBox(~w,Rect(587,120,33,20));
 ~numtxt.background_(Color.green);
@@ -112,7 +112,9 @@ if(~texto.focus != true, {~selectsave.value = 0});//regresar boton a estado 0
 	});
 	//[view,mod, uni, key].postln;
 });
+~w.onClose = { "la ventana se ha cerrado, has sido desconectado de la red del ensamble".inform};
 //
+"\n GUI Ok!".inform;
 );
 // Font.availableFonts
 /*
