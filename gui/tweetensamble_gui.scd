@@ -27,9 +27,14 @@
 ~num.normalColor_(Color.black);
 ~num.typingColor_(Color(0,200,0));
 ~num.action ={|num|
+	if(~conecta.value == 1,{
+		4.do{"Cannot change Participants while connected".postcln};
+		~num.value = ~uid.size+1;//mantiene el valor del ensamble mientras esta conectado
+		},{
 			("Number of Ensamble Participants set to: " ++ num.value).postln;
 			~numusr = num.value;
 			~uid = Array.newClear(~numusr-1);//
+	});
 };
 //ip de usuario
 ~iplabel = StaticText(~w,Rect(20,150,200,12)).string = "User IP:(click enter)";
@@ -39,7 +44,7 @@
 ~ip.action = {|field|
 	if(~conecta.value == 1,{
 		4.do{"Cannot change IP while connected".postcln;}
-	},{
+		},{
 			~mip = field.value;
 			4.do{"URI has been set".inform};
 			~texto.string = "URI has been set";
@@ -53,15 +58,18 @@
 ~usr = TextField(~w,Rect(20,197,200,20)).background = Color.cyan;
 ~usr.action = {|field|
 	if(~mip != nil,{
-		~miusuario = field.value;
-		4.do{"User has been set".inform};
-		~texto.string = "User has been set";
-		~usr.string = "";
-	},{
-		4.do{"IP must be set before User".inform};
-		~texto.string = "IP must be set before User";
+		if(~conecta.value == 1,{
+			4.do{"Cannot change IP while connected".postcln};
+			},{
+				~miusuario = field.value;
+				4.do{"User has been set".inform};
+				~texto.string = "User has been set";
+				~usr.string = "";
+		})},
+		{
+			4.do{"IP must be set before User".inform};
+			~texto.string = "IP must be set before User";
 	});
-
 };
 ///lista de usuarios
 ~lstlabel = StaticText(~w,Rect(20,219,200,12)).string = "Ensamble list:";

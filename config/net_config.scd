@@ -30,8 +30,8 @@ OSCdef(\usrs, { |msg, time, addr, recvPort|
 	//[twodindx[0],indx,twodindx[1]].postcln;
 },'/ensamble').fix;
 // enviar [ip,~miusuario,id]
-~loopback.sendBundle(0.2,['/ensamble',"karlita","192.168.0.5"]);
-~loopback.sendBundle(0.2,['/desconecta',"karlita","192.168.0.5"]);
+//~loopback.sendBundle(0.2,['/ensamble',"karlita","192.168.0.5"]);
+//~loopback.sendBundle(0.2,['/desconecta',"karlita","192.168.0.5"]);
 //~uid.find(["192.168.0.3"]);
 // ~uid.postln;
 //////elimina usuario al desconectarse/////////
