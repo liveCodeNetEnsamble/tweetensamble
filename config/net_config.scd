@@ -11,12 +11,15 @@ NetAddr.broadcastFlag = true;
 ~loopback = NetAddr("127.0.0.1", ~puerto); //
 //////responde a nombre de usuario/////////
 OSCdef(\usrs, { |msg, time, addr, recvPort|
-	~uid.put(~msgit,msg[1] ++ ~msgit);//llena array de usuarios
+	msg[1].postcln;
+	if(~msgit > ~numusr,{"Users list full".inform;~msgit=0},{
+		~uid.put(~uid.find([nil]),msg[1]);
+	});
 	~msgit = ~msgit + 1;
-	[msg,recvPort].postcln;
-	//~msgit.postcln;
-},'/ensamble').fix;
+},"/ensamble").fix;
 // enviar [ip,~miusuario,id]
+~loopback.sendMsg("/ensamble",~miusuario);
+//~uid.postln;
 Task({//escucha por nuevos usuarios cada segundo
 	({
 

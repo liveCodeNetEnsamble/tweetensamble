@@ -17,8 +17,9 @@
 ~ip = TextField(~w,Rect(20,162,200,20)).background = Color.cyan;
 ~ip.action = {|field|
 	~mip = field.value;
-	4.do{"URI has been set, now add User".inform};
-	~usr.string = "";
+	4.do{"URI has been set".inform};
+	~texto.string = "URI has been set";
+	~ip.string = "";
 };
 //nombre usuario
 ~usrlabel = StaticText(~w,Rect(20,185,200,12)).string = "User Name:(click enter)";
@@ -26,37 +27,61 @@
 ~usrlabel.stringColor = Color.cyan;
 ~usr = TextField(~w,Rect(20,197,200,20)).background = Color.cyan;
 ~usr.action = {|field|
-	~miusuario = field.value;
-	4.do{"User has been set, now press connect".inform};
-	~usr.string = "";
+	if(~mip != nil,{
+		~miusuario = field.value;
+		4.do{"User has been set".inform};
+		~texto.string = "User has been set";
+		~usr.string = "";
+	},{
+		4.do{"IP must be set before User".inform};
+		~texto.string = "IP must be set before User";
+	});
+
 };
 ///lista de usuarios
-~lstlabel = StaticText(~w,Rect(20,219,200,12)).string = "Ensamble users list:";
+~lstlabel = StaticText(~w,Rect(20,219,200,12)).string = "Ensamble list:";
 ~lstlabel.background = Color.black;
 ~lstlabel.stringColor = Color.cyan;
 ~usrlist = TextView(~w,Rect(20,231,200,148)).background_(Color.cyan).focus(false);
 ~usrlist.autohidesScrollers_(true);
 ~usrlist.editable_(false);
 //botones
-~conecta = Button(~w,Rect(20,385,200,40));
+~conecta = Button(~w,Rect(20,385,100,40));
 ~conecta.states_([
-            ["Connect to ensamble", Color.black, Color.cyan],
-				["Disconnect to refresh list", Color.cyan, Color.black]
+            ["Connect", Color.black, Color.cyan],
+				["Disconnect", Color.cyan, Color.black]
         ]);
 ~conecta.action_({|butt|
-	if(butt.value == 0, {
+	if(butt.value == 0, {//resetea valores de usuario
 		~usrlist.string  = "";
-		11.do{"Refreshing ensamble list".warn};
-		~loopback.sendMsg("/ensamble","");
+		~miusuario=nil;
+		~mip=nil;
+		~texto.string = "You've been disconnected";
 	});
 	if(butt.value == 1, {
 		if(~miusuario !=nil,{
-			~loopback.sendBundle("/ensamble", [~miusuario,]);//envia tu nombre, ip, puerto a los demas
+			~loopback.sendMsg("/ensamble",~miusuario);//envia tu nombre, ip, puerto a los demas
 			//accion nombre usuario
-			~usrlist.setString(~miusuario ++ "\n" ++ ~uid.join("\n"),0); //enlista usuario con las ips conectadas
-			~usrlist.setStringColor(Color.magenta,0,~miusuario.size);//colorea miusuario
-		},{11.do{"Must set a username before connection".warn};~conecta.value = 0});
+			~usrlist.setString(~miusuario ++ "\n" ++ ~uid.join("\n"),0); //enlista usr con las ips conectadas
+			~usrlist.setStringColor(Color.red,0,~miusuario.size);//colorea miusuario
+		},{
+				var wcon = "Must set an 'IP' and 'Username' in order to connect";
+				11.do{wcon.warn};
+				~texto.string = wcon;
+				~conecta.value = 0});
 	});
+});
+//botones
+~refresca = Button(~w,Rect(120,385,100,40));
+~refresca.states_([
+            ["Refresh List", Color.black, Color.cyan]
+        ]);
+~refresca.action_({|butt|
+	if(~conecta.value == 1,{
+		~usrlist.string = "";
+		~usrlist.setString(~miusuario ++ "\n" ++ ~uid.join("\n"),0);
+		~usrlist.setStringColor(Color.red,0,~miusuario.size);//colorea miusuario
+	},{"Connect first, please.".warn;~texto.string = "Connect first, please.";});
 });
 //
 // ~conecta.value.postln;
@@ -120,7 +145,7 @@
 	});
 	//[view,mod, uni, key].postln;
 });
-~w.onClose = { "la ventana se ha cerrado, has sido desconectado de la red del ensamble".inform};
+~w.onClose = { "window is closed, you've been disconnected".inform};
 //
 "\n GUI Ok!".inform;
 );
