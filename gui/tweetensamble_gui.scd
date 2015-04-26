@@ -10,21 +10,31 @@
 ~texto.string = "Write, share and evaluate SCtweets here ...";
 ~texto.syntaxColorize(true);
 ~texto.enterInterpretsSelection(true);//evalua el texto
+//ip de usuario
+~iplabel = StaticText(~w,Rect(20,150,200,12)).string = "User IP:(click enter)";
+~iplabel.background = Color.black;
+~iplabel.stringColor = Color.cyan;
+~ip = TextField(~w,Rect(20,162,200,20)).background = Color.cyan;
+~ip.action = {|field|
+	~mip = field.value;
+	4.do{"URI has been set, now add User".inform};
+	~usr.string = "";
+};
 //nombre usuario
-~usrlabel = StaticText(~w,Rect(20,150,200,12)).string = "User Name:";
+~usrlabel = StaticText(~w,Rect(20,185,200,12)).string = "User Name:(click enter)";
 ~usrlabel.background = Color.black;
 ~usrlabel.stringColor = Color.cyan;
-~usr = TextField(~w,Rect(20,162,200,20)).background = Color.cyan;
+~usr = TextField(~w,Rect(20,197,200,20)).background = Color.cyan;
 ~usr.action = {|field|
 	~miusuario = field.value;
 	4.do{"User has been set, now press connect".inform};
 	~usr.string = "";
 };
 ///lista de usuarios
-~lstlabel = StaticText(~w,Rect(20,187,200,12)).string = "Ensamble users list:";
+~lstlabel = StaticText(~w,Rect(20,219,200,12)).string = "Ensamble users list:";
 ~lstlabel.background = Color.black;
 ~lstlabel.stringColor = Color.cyan;
-~usrlist = TextView(~w,Rect(20,199,200,180)).background_(Color.cyan).focus(false);
+~usrlist = TextView(~w,Rect(20,231,200,148)).background_(Color.cyan).focus(false);
 ~usrlist.autohidesScrollers_(true);
 ~usrlist.editable_(false);
 //botones
@@ -38,15 +48,13 @@
 		~usrlist.string  = "";
 		11.do{"Refreshing ensamble list".warn};
 		~loopback.sendMsg("/ensamble","");
-		//~usrlist.setString(~miusuario ++ "\n" ++ ~uid.join("\n"),0);
-		//~conecta.value = 0;
 	});
 	if(butt.value == 1, {
 		if(~miusuario !=nil,{
-			~loopback.sendMsg("/ensamble",~miusuario);//manda tu nombre a los demas
+			~loopback.sendBundle("/ensamble", [~miusuario,]);//envia tu nombre, ip, puerto a los demas
 			//accion nombre usuario
-			~usrlist.setString(~miusuario ++ "\n" ++ ~uid.join("\n"),0);
-			~usrlist.setStringColor(Color.magenta,0,~miusuario.size);
+			~usrlist.setString(~miusuario ++ "\n" ++ ~uid.join("\n"),0); //enlista usuario con las ips conectadas
+			~usrlist.setStringColor(Color.magenta,0,~miusuario.size);//colorea miusuario
 		},{11.do{"Must set a username before connection".warn};~conecta.value = 0});
 	});
 });

@@ -20,12 +20,13 @@
 //ususarios
 ~numusr = 4;//numero de usuarios,localhost siempre es index 0
 ~miusuario = nil;//mi variable
+~mip = nil;//mi variable
 ~uid = Array.newClear(~numusr);//lista de usuarios
+~othersip = Array.newClear(~numusr-1);// array de ips de conectados
 ~comparte = nil;//variable para compartir
 //conexion local
 ~n = ();//array de netaddrs usuarios
 ~puerto=57120;//puerto base
-~netall;//red de todos
 ~turl;//conexion a twitter
 ~uurl = [];//array usuarios
 ////////terminan variables globales/////////////

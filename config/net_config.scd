@@ -1,25 +1,28 @@
 //LiveCodeNet Ensamble
 //crea, coolabora, comparte tus SCtweets
 /////
-/*
 //conexion local History + NetAddr
 NetAddr.broadcastFlag = true;
-~n.addrs = (0..~numusr).collect { |x|
-	~netall = NetAddr("255.255.255.255", ~puerto + x);
+~n.addrs = (0..~numusr).collect { |x| //array con distintos puertos
+	NetAddr("255.255.255.255", ~puerto + x);//toda la mascara de subred
 };
-*/
-~loopback.ip
-~n.post
 ////////////////////
 /////debug local:
 ~loopback = NetAddr("127.0.0.1", ~puerto); //
 //////responde a nombre de usuario/////////
-OSCdef(\tweet, { |msg, time, addr, recvPort,i|
-	//[msg,recvPort].postcln;
-	~uid.put(~msgit,msg[1] ++ ~msgit);
+OSCdef(\usrs, { |msg, time, addr, recvPort|
+	~uid.put(~msgit,msg[1] ++ ~msgit);//llena array de usuarios
 	~msgit = ~msgit + 1;
+	[msg,recvPort].postcln;
 	//~msgit.postcln;
 },'/ensamble').fix;
+// enviar [ip,~miusuario,id]
+Task({//escucha por nuevos usuarios cada segundo
+	({
+
+		1.wait;
+	}).loop;
+});
 //
 ///
 ////
