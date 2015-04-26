@@ -60,9 +60,9 @@
 	});
 	if(butt.value == 1, {
 		if(~miusuario !=nil,{
-			~loopback.sendMsg("/ensamble",~miusuario);//envia tu nombre, ip, puerto a los demas
+			~n.sendBundle(0.1,['/ensamble',~miusuario,~mip,~puerto]);//envia tu nombre, ip, puerto a los demas
 			//accion nombre usuario
-			~usrlist.setString(~miusuario ++ "\n" ++ ~uid.join("\n"),0); //enlista usr con las ips conectadas
+			~usrlist.setString([~miusuario,~mip].join(", ") ++ "\n" ++ ~uid.join("\n"),0); //enlista usr con las ips conectadas
 			~usrlist.setStringColor(Color.red,0,~miusuario.size);//colorea miusuario
 		},{
 				var wcon = "Must set an 'IP' and 'Username' in order to connect";
@@ -79,9 +79,9 @@
 ~refresca.action_({|butt|
 	if(~conecta.value == 1,{
 		~usrlist.string = "";
-		~usrlist.setString(~miusuario ++ "\n" ++ ~uid.join("\n"),0);
+		~usrlist.setString([~miusuario,~mip].join(", ") ++ "\n" ++ ~uid.join("\n"),0);
 		~usrlist.setStringColor(Color.red,0,~miusuario.size);//colorea miusuario
-	},{"Connect first, please.".warn;~texto.string = "Connect first, please.";});
+	},{"Connect first, please.".warn;});
 });
 //
 // ~conecta.value.postln;

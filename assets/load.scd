@@ -31,5 +31,5 @@
 ~uurl = [];//array usuarios
 ////////terminan variables globales/////////////
 //aqui las rutas de los archivos ligados al arranque
-(~url ++ "gui/tweetensamble_gui.scd").load;
 (~url ++ "config/net_config.scd").load;
+(~url ++ "gui/tweetensamble_gui.scd").load;
