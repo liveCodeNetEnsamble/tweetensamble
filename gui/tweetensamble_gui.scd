@@ -5,11 +5,27 @@
 (
 ~w = Window("TweetEnsamble - Collaborative sctweets",Rect.aboutPoint(Window.screenBounds.center,320,220),false,scroll:false).front;
 //texto de entrada
-~texto = TextView(~w.asView,Rect(20,20,600,120)).background_(Color.cyan).focus(true);
+~texto = TextView(~w.asView,Rect(20,20,600,100)).background_(Color.cyan).focus(true);
 ~texto.setFont(Font("Bitstream Charter",24,true,false),0,140);
 ~texto.string = "Write, share and evaluate SCtweets here ...";
 ~texto.syntaxColorize(true);
 ~texto.enterInterpretsSelection(true);//evalua el texto
+//numero de usuarios
+~numlabel = StaticText(~w,Rect(20,125,150,20)).string = "participants: (max 12)";
+~numlabel.background = Color.black;
+~numlabel.stringColor = Color.cyan;
+~num = NumberBox(~w,Rect(170,125,50,20)).background = Color.cyan;
+~num.clipLo = 1;
+~num.clipHi = 12;
+~num.align_(\center);
+~num.step_(1);
+~num.normalColor_(Color.black);
+~num.typingColor_(Color(0,200,0));
+~num.action ={|num|
+	("Number of posible users set to: " ++ num.value).postln;
+	~numusr = num.value;
+	~uid = Array.newClear(~numusr);//lista de usuarios
+};
 //ip de usuario
 ~iplabel = StaticText(~w,Rect(20,150,200,12)).string = "User IP:(click enter)";
 ~iplabel.background = Color.black;
@@ -96,7 +112,7 @@
         .action_({|butt|
 		if(butt.value == 0, {
 			~texto.select(0,140);//
-			~loopback.sendMsg("/ensamble",~miusuario);
+			~loopback.sendMsg('/enviotodos',~texto.selectedString);//envia texto a todos
         });
 		if(butt.value == 1, {
             ~texto.select(0,140);//
@@ -126,7 +142,7 @@
 		});
 	});
 //cuenta de letras
-~numtxt = NumberBox(~w,Rect(587,120,33,20));
+~numtxt = NumberBox(~w,Rect(587,100,33,20));
 ~numtxt.background_(Color.green);
 ~numtxt.value = ~texto.string.size;
 //acciones
@@ -145,9 +161,9 @@
 	});
 	//[view,mod, uni, key].postln;
 });
-~w.onClose = { "window is closed, you've been disconnected".inform};
+~w.onClose = { "window is closed, you've been disconnected".inform;~uid = Array.newClear(~numusr)};
 //
-"\n GUI Ok!".inform;
+"\nGUI Ok!".inform;
 );
 // Font.availableFonts
 /*

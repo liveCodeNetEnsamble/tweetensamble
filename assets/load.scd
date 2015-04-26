@@ -18,10 +18,10 @@
 ~fileit = 0 ;//guarda archivos con distinto nombre
 ~msgit = 0;//llena array de usuarios
 //ususarios
-~numusr = 4;//numero de usuarios,localhost siempre es index 0
+~numusr = 0;//numero de usuarios,localhost siempre es index 0
 ~miusuario = nil;//mi variable
 ~mip = nil;//mi variable
-~uid = Array.newClear(~numusr);//lista de usuarios
+~uid = nil;//lista de usuarios
 ~othersip = Array.newClear(~numusr-1);// array de ips de conectados
 ~comparte = nil;//variable para compartir
 //conexion local
