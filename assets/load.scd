@@ -30,7 +30,10 @@
 ~puerto=57120;//puerto base
 ~turl;//conexion a twitter
 ~uurl = [];//array usuarios
+//defaults
+//
 ////////terminan variables globales/////////////
 //aqui las rutas de los archivos ligados al arranque
 (~url ++ "config/net_config.scd").load;
+(~url ++ "gui/tweetensamble_input_gui.scd").load;
 (~url ++ "gui/tweetensamble_gui.scd").load;
