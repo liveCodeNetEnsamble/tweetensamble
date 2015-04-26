@@ -22,7 +22,8 @@
 ~miusuario = nil;//mi variable
 ~mip = nil;//mi variable
 ~uid = nil;//lista de usuarios
-~othersip = Array.newClear(~numusr-1);// array de ips de conectados
+~uid = nil;
+~othersip = Array.newClear(~numusr-1);// array de ips de conectados//no se esta usando
 ~comparte = nil;//variable para compartir
 //conexion local
 ~n = ();//array de netaddrs usuarios

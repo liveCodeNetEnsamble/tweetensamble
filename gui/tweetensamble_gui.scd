@@ -11,20 +11,25 @@
 ~texto.syntaxColorize(true);
 ~texto.enterInterpretsSelection(true);//evalua el texto
 //numero de usuarios
-~numlabel = StaticText(~w,Rect(20,125,150,20)).string = "participants: (max 12)";
+~numlabel = StaticText(~w,Rect(20,125,150,20)).string = "participants: (max 5)";
 ~numlabel.background = Color.black;
 ~numlabel.stringColor = Color.cyan;
 ~num = NumberBox(~w,Rect(170,125,50,20)).background = Color.cyan;
-~num.clipLo = 1;
-~num.clipHi = 12;
+~num.clipLo = 2;
+~num.clipHi = 5;
+(
+~num.value = 5;//default # integrantes LCNE
+~numusr = ~num.value;
+~uid = Array.newClear(~numusr-1);//
+);
 ~num.align_(\center);
 ~num.step_(1);
 ~num.normalColor_(Color.black);
 ~num.typingColor_(Color(0,200,0));
 ~num.action ={|num|
-	("Number of posible users set to: " ++ num.value).postln;
-	~numusr = num.value;
-	~uid = Array.newClear(~numusr);//lista de usuarios
+			("Number of Ensamble Participants set to: " ++ num.value).postln;
+			~numusr = num.value;
+			~uid = Array.newClear(~numusr-1);//
 };
 //ip de usuario
 ~iplabel = StaticText(~w,Rect(20,150,200,12)).string = "User IP:(click enter)";
@@ -32,10 +37,14 @@
 ~iplabel.stringColor = Color.cyan;
 ~ip = TextField(~w,Rect(20,162,200,20)).background = Color.cyan;
 ~ip.action = {|field|
-	~mip = field.value;
-	4.do{"URI has been set".inform};
-	~texto.string = "URI has been set";
-	~ip.string = "";
+	if(~conecta.value == 1,{
+		4.do{"Cannot change IP while connected".postcln;}
+	},{
+			~mip = field.value;
+			4.do{"URI has been set".inform};
+			~texto.string = "URI has been set";
+			~ip.string = "";
+	});
 };
 //nombre usuario
 ~usrlabel = StaticText(~w,Rect(20,185,200,12)).string = "User Name:(click enter)";
@@ -72,13 +81,13 @@
 		~usrlist.string  = "";
 		~miusuario=nil;
 		~mip=nil;
-		~texto.string = "You've been disconnected";
+		~texto.string = "You've been disconnected from ensamble list";
+		~loopback.sendBundle(0.2,['/desconecta',~miusuario,~mip]);//manda id para ser desconectado
 	});
 	if(butt.value == 1, {
 		if(~miusuario !=nil,{
 			~n.sendBundle(0.1,['/ensamble',~miusuario,~mip,~puerto]);//envia tu nombre, ip, puerto a los demas
-			//accion nombre usuario
-			~usrlist.setString([~miusuario,~mip].join(", ") ++ "\n" ++ ~uid.join("\n"),0); //enlista usr con las ips conectadas
+			~usrlist.setString(~miusuario ++ ": "++ ~mip ++ "\n" ++ ~uid.join("\n"),0); //enlista usr con las ips conectadas
 			~usrlist.setStringColor(Color.red,0,~miusuario.size);//colorea miusuario
 		},{
 				var wcon = "Must set an 'IP' and 'Username' in order to connect";
@@ -95,7 +104,7 @@
 ~refresca.action_({|butt|
 	if(~conecta.value == 1,{
 		~usrlist.string = "";
-		~usrlist.setString([~miusuario,~mip].join(", ") ++ "\n" ++ ~uid.join("\n"),0);
+		~usrlist.setString([~miusuario,~mip].join(", ") ++ "\n" ++ ~uid.join(",\n"),0);
 		~usrlist.setStringColor(Color.red,0,~miusuario.size);//colorea miusuario
 	},{"Connect first, please.".warn;});
 });
