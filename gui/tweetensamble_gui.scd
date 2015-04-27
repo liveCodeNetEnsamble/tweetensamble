@@ -122,7 +122,7 @@
 	},{"Connect first, please.".warn;});
 });
 //ventana de entrada
-~inputxt = Button(~w,Rect(220,385,100,40));
+~inputxt = Button(~w,Rect(240,385,100,40));
 ~inputxt.states_([
             ["Open input", Color.black, Color.cyan],
 			["Close Input", Color.cyan, Color.black]
@@ -132,7 +132,7 @@
 );
 //
 // ~conecta.value.postln;
-~labelbut = StaticText(~w,Rect(507,125,113,12)).string_("Text to Users");
+~labelbut = StaticText(~w,Rect(507,125,113,12)).string_("Text to All Users");
 ~labelbut.background = Color.black;
 ~labelbut.stringColor = Color.cyan;
 ~selectsend = Button(~w,Rect(507,137,113,20))
@@ -166,7 +166,11 @@
 			a.write("//done with tweetwensamble by " ++ ~miusuario ++ "\n" ++ ~texto.selectedString ++ "\n" ++ "//2015");
 			a.close;
 			~fileit = ~fileit+1;
-			11.do{("The Selection has been saved to: " ++ n).inform};
+			{(~url +/+ "gui/tweetensamble_input_gui.scd").load;
+			~intxt.front;
+			~textoin.string = "The Selection has been saved to: " ++ n;
+			}.defer(0.1);
+			4.do{("The Selection has been saved to: " ++ n).inform};
 	});
 		if(butt.value == 1, {
             ~texto.select(0,140);//

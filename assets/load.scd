@@ -12,7 +12,7 @@
 	0.125+x.wait;
 };
 /////////////////////
-//variables globales
+// defaults
 ////////////////////
 //iteradores
 ~fileit = 0 ;//guarda archivos con distinto nombre
@@ -30,8 +30,6 @@
 ~puerto=57120;//puerto base
 ~turl;//conexion a twitter
 ~uurl = [];//array usuarios
-//defaults
-//
 ////////terminan variables globales/////////////
 //aqui las rutas de los archivos ligados al arranque
 (~url ++ "config/net_config.scd").load;
