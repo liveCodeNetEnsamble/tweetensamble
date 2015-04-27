@@ -29,6 +29,10 @@
 ~num.action ={|num|
 	if(~conecta.value == 1,{
 		4.do{"Cannot change Participants while connected".postcln};
+		{(~url +/+ "gui/tweetensamble_input_gui.scd").load;
+		~intxt.front;
+		~textoin.string = "Cannot change Participants while connected!!!";
+		}.defer(0.1);
 		~num.value = ~uid.size+1;//mantiene el valor del ensamble mientras esta conectado
 		},{
 			("Number of Ensamble Participants set to: " ++ num.value).postln;
@@ -43,7 +47,11 @@
 ~ip = TextField(~w,Rect(20,162,200,20)).background = Color.cyan;
 ~ip.action = {|field|
 	if(~conecta.value == 1,{
-		4.do{"Cannot change IP while connected".postcln;}
+		4.do{"Cannot change IP while connected".postcln};
+		{(~url +/+ "gui/tweetensamble_input_gui.scd").load;
+		~intxt.front;
+		~textoin.string = "Cannot change IP while connected!!!";
+		}.defer(0.1);
 		},{
 			~mip = field.value;
 			4.do{"URI has been set".inform};
@@ -61,6 +69,10 @@
 	if(~mip != nil,{
 		if(~conecta.value == 1,{
 			4.do{"Cannot change Username while connected".postcln};
+			{(~url +/+ "gui/tweetensamble_input_gui.scd").load;
+			~intxt.front;
+			~textoin.string = "Cannot change Username while connected!!!";
+			}.defer(0.1);
 			},{
 				~miusuario = field.value;
 				4.do{"User has been set, Now! press 'Connect".inform};
@@ -101,7 +113,9 @@
 			~n.sendBundle(0.1,['/ensamble',~miusuario,~mip,~puerto]);//envia tu nombre, ip, puerto a los demas
 			~usrlist.setString(~miusuario ++ ": "++ ~mip ++ "\n" ++ ~uid.join("\n"),0); //enlista usr con las ips conectadas
 			~usrlist.setStringColor(Color.red,0,~miusuario.size);//colorea miusuario
-		},{
+			~texto.string = "Compose and share your SCTweets";
+			~textoin.string = "Compose and share your SCTweets";
+			},{
 				var wcon = "Must set an 'IP' and 'Username' in order to connect";
 				11.do{wcon.warn};
 				~texto.string = wcon;
@@ -122,7 +136,7 @@
 	},{"Connect first, please.".warn;});
 });
 //ventana de entrada
-~inputxt = Button(~w,Rect(240,385,100,40));
+~inputxt = Button(~w,Rect(240,385,113,40));
 ~inputxt.states_([
             ["Open input", Color.black, Color.cyan],
 			["Close Input", Color.cyan, Color.black]
@@ -131,11 +145,23 @@
 	if(val.value == 1,{(~url ++ "gui/tweetensamble_input_gui.scd").load;~intxt.front},{~intxt.close})};
 );
 //
-// ~conecta.value.postln;
-~labelbut = StaticText(~w,Rect(507,125,113,12)).string_("Text to All Users");
+~labelbut3 = StaticText(~w,Rect(507,125,113,12)).string_("Select to eval");
+~labelbut3.background = Color.black;
+~labelbut3.stringColor = Color.cyan;
+~selectbut = Button(~w,Rect(507,137,113,28))
+        .states_([
+            ["Select all", Color.black, Color.cyan],
+        ])
+        .action_({|butt|
+		if(butt.value == 0, {
+            ~texto.select(0,~texto.string.size);//selecciona todo el texto en la ventana
+		});
+	});
+//
+~labelbut = StaticText(~w,Rect(507,170,113,12)).string_("Text to All Users");
 ~labelbut.background = Color.black;
 ~labelbut.stringColor = Color.cyan;
-~selectsend = Button(~w,Rect(507,137,113,20))
+~selectsend = Button(~w,Rect(507,181,113,28))
         .states_([
             ["Select 140 chars", Color.black, Color.cyan],
 			["Send to all", Color.black, Color.green]
@@ -150,10 +176,10 @@
 		});
 	});
 //
-~labelbut2 = StaticText(~w,Rect(507,160,113,12)).string_("Text to File");
+~labelbut2 = StaticText(~w,Rect(507,340,113,12)).string_("Text to File");
 ~labelbut2.background = Color.black;
 ~labelbut2.stringColor = Color.cyan;
-~selectsave = Button(~w,Rect(507,172,113,20))
+~selectsave = Button(~w,Rect(507,352,113,28))
         .states_([
             ["Select 140 chars", Color.black, Color.cyan],
 			["Save to file", Color.black, Color.green]
@@ -176,6 +202,17 @@
             ~texto.select(0,140);//
 		});
 	});
+//postea a twitter
+~outsct = Button(~w,Rect(507,385,113,40));
+~outsct.states_([
+            ["Post SCTweet", Color.black, Color.green],
+			["Close Browser", Color.green, Color.black]
+        ]);
+~outsct.action_({|val|
+	if(val.value == 1,{
+		(~url ++ "gui/login_gui.scd").load;~web.front},{~web.close}
+	);
+});
 //cuenta de letras
 ~numtxt = NumberBox(~w,Rect(587,100,33,20));
 ~numtxt.background_(Color.green);
