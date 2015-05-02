@@ -44,3 +44,4 @@ OSCdef(\snd, { |msg, time, addr, recvPort|
 		~textoin.string = msg[1] ++ "\n//sent by @" ++ ~miusuario;}.defer(0.1);
 },'/enviotodos').fix;
 ///
+~turl.sendMsg("/message", "#tweetensamble test 2....");

@@ -3,7 +3,7 @@
 //GUI para logear y postear el tweet
 ~web = Window("Acustweet - colaborative sctweets",Rect(200,200,720,480),true);
 ~browser = WebView(~web,Rect(10,10,700,460));
-~browser.url_(~turl.ip);//aqui debeb ir la direccion de login para twittear
+~browser.url_(~turl.hostname);//aqui debeb ir la direccion de login para twittear
 ~browser.evaluateJavaScript(
 	""
 	//posiblemente el login y post tweet con oAuth
