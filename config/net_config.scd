@@ -2,10 +2,9 @@
 //crea, coolabora, comparte tus SCtweets
 /////
 //conexion local History + NetAddr
-~all = NetAddr.broadcastFlag = true;
-~n.addrs = (0..~numusr).collect { |x| //array con distintos puertos
-	NetAddr("255.255.255.255", ~puerto + x);//toda la mascara de subred
-};
+//~all = NetAddr.broadcastFlag = true;
+~n=NetAddr("255.255.255.255", ~puerto);//toda la mascara de subred
+
 /////debug local:
 ~loopback = NetAddr("127.0.0.1", ~puerto); //
 ////

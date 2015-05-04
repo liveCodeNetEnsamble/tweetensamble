@@ -104,8 +104,8 @@
 		~usrlist.string  = "";
 		~miusuario=nil;
 		~mip=nil;
-		~texto.string = "You've been disconnected from ensamble list";
-		~textoin.string = "You've been disconnected from ensamble list";
+		~texto.string = "You've been disconnected from ensamble list + your code deleted";
+		~textoin.string = "You've been disconnected from ensamble list + your code deleted";
 		~loopback.sendBundle(0.2,['/desconecta',~miusuario,~mip]);//manda id para ser desconectado
 	});
 	if(butt.value == 1, {
