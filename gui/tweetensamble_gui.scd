@@ -106,7 +106,7 @@
 		~mip=nil;
 		~texto.string = "You've been disconnected from ensamble list + your code deleted";
 		~textoin.string = "You've been disconnected from ensamble list + your code deleted";
-		~loopback.sendBundle(0.2,['/desconecta',~miusuario,~mip]);//manda id para ser desconectado
+		~loopback.sendBundle(0.2,['/desconecta',~miusuario,~mip]);//falta asignarlo a la ip
 	});
 	if(butt.value == 1, {
 		if(~miusuario != nil,{
@@ -117,7 +117,7 @@
 			~textoin.string = "Compose and share your SCTweets";
 			},{
 				var wcon = "Must set an 'IP' and 'Username' in order to connect";
-				11.do{wcon.warn};
+				4.do{wcon.warn};
 				~texto.string = wcon;
 				~textoin.string = wcon;
 				~conecta.value = 0});
