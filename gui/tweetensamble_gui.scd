@@ -57,6 +57,7 @@
 			4.do{"URI has been set".inform};
 			~texto.string = "URI has been set";
 			~textoin.string = "URI has been set";
+			~numtxt.value = ~texto.string.size;
 			~ip.string = "";
 	});
 };
@@ -78,12 +79,14 @@
 				4.do{"User has been set, Now! press 'Connect".inform};
 				~texto.string = "User has been set, Now! press 'Connect' ";
 				~textoin.string = "User has been set, Now! press 'Connect' ";
+				~numtxt.value = ~texto.string.size;
 				~usr.string = "";
 		})},
 		{
 			4.do{"IP must be set before Username".inform};
 			~texto.string = "IP must be set before Username";
 			~textoin.string = "IP must be set before Username";
+			~numtxt.value = ~texto.string.size;
 	});
 };
 ///lista de usuarios
@@ -106,6 +109,7 @@
 		~mip=nil;
 		~texto.string = "You've been disconnected from ensamble list + your code deleted";
 		~textoin.string = "You've been disconnected from ensamble list + your code deleted";
+		~numtxt.value = ~texto.string.size;
 		~loopback.sendBundle(0.2,['/desconecta',~miusuario,~mip]);//falta asignarlo a la ip
 	});
 	if(butt.value == 1, {
@@ -115,11 +119,13 @@
 			~usrlist.setStringColor(Color.red,0,~miusuario.size);//colorea miusuario
 			~texto.string = "Compose and share your SCTweets";
 			~textoin.string = "Compose and share your SCTweets";
+			~numtxt.value = ~texto.string.size;
 			},{
 				var wcon = "Must set an 'IP' and 'Username' in order to connect";
 				4.do{wcon.warn};
 				~texto.string = wcon;
 				~textoin.string = wcon;
+				~numtxt.value = ~texto.string.size;
 				~conecta.value = 0});
 	});
 });
@@ -197,6 +203,7 @@
 			~textoin.string = "The Selection has been saved to: " ++ n;
 			}.defer(0.1);
 			4.do{("The Selection has been saved to: " ++ n).inform};
+			~numtxt.value = ~texto.string.size;
 	});
 		if(butt.value == 1, {
             ~texto.select(0,140);//
