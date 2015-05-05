@@ -156,7 +156,7 @@
 ~labelbut3.stringColor = Color.cyan;
 ~selectbut = Button(~w,Rect(507,137,113,28))
         .states_([
-            ["Select & eval", Color.black, Color.cyan],
+            ["Evaluate 140", Color.black, Color.cyan],
         ])
         .action_({|butt|
 		if(butt.value == 0, {
@@ -165,10 +165,23 @@
 		});
 	});
 //
-~labelbut = StaticText(~w,Rect(507,170,113,12)).string_("Text to All Users");
+~labelbut4 = StaticText(~w,Rect(507,170,113,12)).string_("Stop server");
+~labelbut4.background = Color.black;
+~labelbut4.stringColor = Color.cyan;
+~stopbut = Button(~w,Rect(507,181,113,28))
+        .states_([
+            ["Kill that Noise", Color.black, Color.cyan],
+        ])
+        .action_({|butt|
+		if(butt.value == 0, {
+			s.killAll;
+		});
+	});
+//
+~labelbut = StaticText(~w,Rect(507,296,113,12)).string_("Text to All Users");
 ~labelbut.background = Color.black;
 ~labelbut.stringColor = Color.cyan;
-~selectsend = Button(~w,Rect(507,181,113,28))
+~selectsend = Button(~w,Rect(507,307,113,28))
         .states_([
             ["Select 140 chars", Color.black, Color.cyan],
 			["Send to all", Color.black, Color.green]

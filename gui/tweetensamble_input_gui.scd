@@ -8,6 +8,7 @@
 ~textoin.setFont(Font("Khmer OS System",24,true,false),0,1400);
 ~textoin.syntaxColorize(true);
 ~textoin.enterInterpretsSelection(false);//evalua el texto
+~textoin.editable_(false);
 //
 ~intxt.onClose = {~inputxt.value = 0};
 )
