@@ -110,7 +110,7 @@
 		~texto.string = "You've been disconnected from ensamble list + your code deleted";
 		~textoin.string = "You've been disconnected from ensamble list + your code deleted";
 		~numtxt.value = ~texto.string.size;
-		~loopback.sendBundle(0.2,['/desconecta',~miusuario,~mip]);//falta asignarlo a la ip
+		~n.sendBundle(0.2,['/desconecta',~miusuario,~mip]);//falta asignarlo a la ip
 	});
 	if(butt.value == 1, {
 		if(~miusuario != nil,{
@@ -156,11 +156,12 @@
 ~labelbut3.stringColor = Color.cyan;
 ~selectbut = Button(~w,Rect(507,137,113,28))
         .states_([
-            ["Select all", Color.black, Color.cyan],
+            ["Select & eval", Color.black, Color.cyan],
         ])
         .action_({|butt|
 		if(butt.value == 0, {
             ~texto.select(0,~texto.string.size);//selecciona todo el texto en la ventana
+			~texto.string.interpretPrint;
 		});
 	});
 //
