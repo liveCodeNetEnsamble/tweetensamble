@@ -15,5 +15,5 @@
 ~accesstokensecret="";
 ///
 //para desplegar el contenido del WebView
-~turl = NetAddr("weblab.mixfuckedup.net",~puerto);//direccion para logear y postear //
+~turl = NetAddr("tweetensamble.mixfuckedup.net",~puerto);//direccion para logear y postear //
 // Help.gui;

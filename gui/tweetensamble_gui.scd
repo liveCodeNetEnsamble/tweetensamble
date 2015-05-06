@@ -223,7 +223,7 @@
             ~texto.select(0,140);//
 		});
 	});
-//postea a twitter
+//loggin a twitter
 ~outsct = Button(~w,Rect(507,385,113,40));
 ~outsct.states_([
             ["Post SCTweet", Color.black, Color.green],
