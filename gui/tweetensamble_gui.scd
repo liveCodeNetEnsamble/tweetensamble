@@ -174,7 +174,7 @@
         ])
         .action_({|butt|
 		if(butt.value == 0, {
-			s.killAll;
+			s.kill;
 		});
 	});
 //

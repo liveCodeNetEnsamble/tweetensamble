@@ -26,7 +26,7 @@
 ~othersip = Array.newClear(~numusr-1);// array de ips de conectados//no se esta usando
 ~comparte = nil;//variable para compartir
 //conexion local
-~n = ();//array de netaddrs usuarios
+//~n = ();//array de netaddrs usuarios
 ~puerto=57120;//puerto base
 ~turl;//conexion a twitter
 ~uurl = [];//array usuarios

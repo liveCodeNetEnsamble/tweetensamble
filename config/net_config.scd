@@ -13,4 +13,6 @@
 ////aqui irian las direcciones de los usuarios(de alguna manera)
 
 ///
+//~n.sendMsg(0.1,"hola");//envia tu nombre, ip, puerto a los demas
+
 // Help.gui;
