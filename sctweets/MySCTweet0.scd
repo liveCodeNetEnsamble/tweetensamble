@@ -1,3 +1,3 @@
-//done with tweetwensamble by caos
-Compose and share your SCTweets
+//done with tweetwensamble by hernani
+
 //2015
