@@ -4,7 +4,7 @@
 ~web = Window("Tweetensamble",Rect(200,200,720,480),false);//~browser.title
 ~browser = WebView(~web,Rect(10,10,700,460));
 ~browser.url_(~turl.hostname);// login para twittear
-~web.onClose = {~outsct.value = 0;~browser.clearCache};
+~web.onClose = {~outsct.value = 0;~browser.clearCache; Server.freeAll};
 /*
 ~browser.evaluateJavaScript("");
 ////

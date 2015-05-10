@@ -189,7 +189,7 @@
         .action_({|butt|
 		if(butt.value == 0, {
 			~texto.select(0,140);//
-			~loopback.sendMsg('/enviotodos',~texto.selectedString);//envia texto a todos
+		~n.sendBundle(0.2,['/enviotodos',~texto.selectedString,~miusuario]);//envia texto a todos
         });
 		if(butt.value == 1, {
             ~texto.select(0,140);//

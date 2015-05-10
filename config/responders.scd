@@ -13,19 +13,17 @@ OSCdef(\usrs, { |msg, time, addr, recvPort|
 		}.defer(0.1);
 		~msgit = maxitems;
 		},{
-			~uid.put(~uid.find([nil]),[msg[1],msg[2]].join(": "));//va llenando la lista
-			{(~url +/+ "gui/tweetensamble_input_gui.scd").load;
-				~intxt.front;
-				~textoin.string = "User " ++ msg[1] ++ " was added to the list";
-			}.defer(0.1);
+			var yo = msg[1].postln;
+			if(yo.asString != ~miusuario,{
+				~uid.put(~uid.find([nil]),[msg[1],msg[2]].join(": "));//va llenando la lista
+				{(~url +/+ "gui/tweetensamble_input_gui.scd").load;
+					~intxt.front;
+					~textoin.string = "User " ++ msg[1] ++ " was added to the list";
+				}.defer(0.1);
+			},{"ya no me auto agregue".postln});
 	});
 	~msgit = ~msgit + 1;
 },'/ensamble').fix;
-/*local debug
-~loopback.sendBundle(0.2,['/ensamble',"Koarlita","192.168.0.111"]);//ingresa susario
-~loopback.sendBundle(0.2,['/desconecta',"Koarlita","192.168.0.111"]);//borra usuario
-~loopback.sendMsg('/enviotodos',"Este mensaje es para todos: blablablablabla...");//envia mensaje general
-*/
 //////elimina usuario al desconectarse/////////
 OSCdef(\exit, { |msg, time, addr, recvPort|
 	var indx;
@@ -37,11 +35,31 @@ OSCdef(\exit, { |msg, time, addr, recvPort|
 	~uid.put(indx,nil);
 },'/desconecta').fix;
 //////envia texto a todos/////////
-OSCdef(\snd, { |msg, time, addr, recvPort|
-	{
-		(~url +/+ "gui/tweetensamble_input_gui.scd").load;
-		~intxt.front;
-		~textoin.string = msg[1] ++ "\n//sent by @" ++ ~miusuario;}.defer(0.1);
+OSCdef(\input, { |msg, time, addr, recvPort|
+	//[msg, time, addr, recvPort].postln;
+	var quien = msg[2];
+	if(quien.asString == ~miusuario, { // para no recibir mi propio mensaje
+		"ya existo".postc;
+		},{
+			{
+				(~url +/+ "gui/tweetensamble_input_gui.scd").load;
+				~intxt.front;
+				~textoin.string = msg[1] ++ "\n//sent by @" ++ quien;
+			}.defer(0.1);
+		});
 },'/enviotodos').fix;
 ///
 OSCdef.trace(false);
+//
+~uid.value;
+~miusuario.postcln;
+//
+//responder condiciona si el mensaje 'x' es = a ~miusuario
+// Help.gui;
+/*local debug
+~n.sendBundle(0.2,['/ensamble',"Koarlita","192.168.0.111"]);//ingresa susario
+~n.sendBundle(0.2,['/desconecta',"Koarlita","192.168.0.111"]);//borra usuario
+~n.sendMsg('/enviotodos',"Este mensaje es para todos: blablablablabla...");//envia mensaje general
+~n.sendBundle(0.1,['/enviotodos',"blablablablabla...",~miusuario]);//envia mensaje general
+
+*/

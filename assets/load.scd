@@ -19,9 +19,9 @@
 ~msgit = 0;//llena array de usuarios
 //ususarios
 ~numusr = 0;//numero de usuarios,localhost siempre es index 0
-~miusuario = nil;//mi variable
-~mip = nil;//mi variable
-~uid = nil;//lista de usuarios
+~miusuario = nil;//mi nombre
+~mip = nil;
+~uid = nil;//lista de usuarios //no contiene mi usuario
 ~uid = nil;
 ~othersip = Array.newClear(~numusr-1);// array de ips de conectados//no se esta usando
 ~comparte = nil;//variable para compartir
@@ -37,3 +37,4 @@
 (~url ++ "gui/tweetensamble_input_gui.scd").load;
 (~url ++ "gui/login_gui.scd").load;
 (~url ++ "gui/tweetensamble_gui.scd").load;
+//
