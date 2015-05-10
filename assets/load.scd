@@ -21,9 +21,8 @@
 ~numusr = 0;//numero de usuarios,localhost siempre es index 0
 ~miusuario = nil;//mi nombre
 ~mip = nil;
-~uid = nil;//lista de usuarios //no contiene mi usuario
-~uid = nil;
-~othersip = Array.newClear(~numusr-1);// array de ips de conectados//no se esta usando
+~uid = nil;//lista de usuarios //no contiene usuario local
+~othersip = nil;// array de ips de conectados
 ~comparte = nil;//variable para compartir
 //conexion local
 //~n = ();//array de netaddrs usuarios
@@ -38,4 +37,3 @@
 (~url ++ "gui/tweetensamble_input_gui.scd").load;
 //(~url ++ "gui/login_gui.scd").load;
 (~url ++ "gui/tweetensamble_gui.scd").load;
-//

@@ -21,6 +21,7 @@
 ~num.value = 5;//default # integrantes LCNE
 ~numusr = ~num.value;
 ~uid = Array.newClear(~numusr-1);//
+~othersip = Array.newClear(~numusr-1);
 );
 ~num.align_(\center);
 ~num.step_(1);
@@ -38,6 +39,7 @@
 			("Number of Ensamble Participants set to: " ++ num.value).postln;
 			~numusr = num.value;
 			~uid = Array.newClear(~numusr-1);//
+			~othersip = Array.newClear(~numusr-1);
 	});
 };
 //ip de usuario
@@ -110,7 +112,7 @@
 		~texto.string = "You've been disconnected from ensamble list + your code deleted";
 		~textoin.string = "You've been disconnected from ensamble list + your code deleted";
 		~numtxt.value = ~texto.string.size;
-		~n.sendBundle(0.2,['/desconecta',~miusuario,~mip]);//falta asignarlo a la ip
+		~n.sendBundle(0.2,['/desconecta',~miusuario,~mip]);//
 	});
 	if(butt.value == 1, {
 		if(~miusuario != nil,{
@@ -233,7 +235,7 @@
 	if(val.value == 1,{
 			(~url ++ "gui/login_gui.scd").load;
 			~web.front;
-			{~web.name=~browser.title}.defer(1);
+			{~web.name=~browser.title}.defer(3);
 		},{
 			~web.close
 		}
@@ -259,7 +261,12 @@
 	});
 	//[view,mod, uni, key].postln;
 });
-~w.onClose = { "window is closed, you've been disconnected".inform;~uid = Array.newClear(~numusr);~msgit=0;Server.freeAll};
+~w.onClose = {
+	"window is closed, you've been disconnected".inform;
+	~uid = Array.newClear(~numusr);
+	~n.sendBundle(0.2,['/off',~mip]);
+	~msgit=0;Server.freeAll
+};
 //
 "\nGUI Ok!".inform;
 );
