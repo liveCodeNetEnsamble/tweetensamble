@@ -105,7 +105,7 @@
 ~conecta.action_({|butt|
 	if(butt.value == 0, {//resetea valores de usuario
 		~usrlist.string  = "";
-		~miusuario=nil;
+		//~miusuario=nil;
 		~mip=nil;
 		~texto.string = "You've been disconnected from ensamble list + your code deleted";
 		~textoin.string = "You've been disconnected from ensamble list + your code deleted";
@@ -160,7 +160,7 @@
         ])
         .action_({|butt|
 		if(butt.value == 0, {
-            ~texto.select(0,~texto.string.size);//selecciona todo el texto en la ventana
+            ~texto.select(0,140/*~texto.string.size*/);//selecciona max 140
 			~texto.string.interpretPrint;
 		});
 	});
@@ -231,7 +231,12 @@
         ]);
 ~outsct.action_({|val|
 	if(val.value == 1,{
-		(~url ++ "gui/login_gui.scd").load;~web.front},{~web.close}
+			(~url ++ "gui/login_gui.scd").load;
+			~web.front;
+			{~web.name=~browser.title}.defer(1);
+		},{
+			~web.close
+		}
 	);
 });
 //cuenta de letras
@@ -254,7 +259,7 @@
 	});
 	//[view,mod, uni, key].postln;
 });
-~w.onClose = { "window is closed, you've been disconnected".inform;~uid = Array.newClear(~numusr);~msgit=0};
+~w.onClose = { "window is closed, you've been disconnected".inform;~uid = Array.newClear(~numusr);~msgit=0;Server.freeAll};
 //
 "\nGUI Ok!".inform;
 );

@@ -1,10 +1,10 @@
 //LiveCodeNet Ensamble
 //crea, coolabora, comparte tus SCtweets
 //GUI para logear y postear el tweet
-~web = Window("Tweetensamble",Rect(200,200,720,480),false);//~browser.title
+~web = Window(nil,Rect(200,200,720,480),false);//~browser.title
 ~browser = WebView(~web,Rect(10,10,700,460));
 ~browser.url_(~turl.hostname);// login para twittear
-~web.onClose = {~outsct.value = 0;~browser.clearCache; Server.freeAll};
+~web.onClose = {~outsct.value = 0};
 /*
 ~browser.evaluateJavaScript("");
 ////
@@ -16,3 +16,4 @@ A String.
 */
 //~interface = (~url ++ "assets/html/interface.scd").load;//trae el contenido html
 //~browser.html = ~interface;
+//s
