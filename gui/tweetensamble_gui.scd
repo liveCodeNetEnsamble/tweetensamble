@@ -225,6 +225,13 @@
             ~texto.select(0,140);//
 		});
 	});
+//mensaje personalizado
+~labelpop = StaticText(~w,Rect(237,298,240,12)).string_("Send / Receive direct Messages:");
+~labelpop.background = Color.black;
+~labelpop.stringColor = Color.cyan;
+~msgmenu = PopUpMenu(~w,Rect(237,310,240,68)).background_(Color.cyan);
+~msgmenu.items = ~uid;
+
 //loggin a twitter
 ~outsct = Button(~w,Rect(507,385,113,40));
 ~outsct.states_([
@@ -261,10 +268,11 @@
 	});
 	//[view,mod, uni, key].postln;
 });
+//cuando se cierra la ventana
 ~w.onClose = {
 	"window is closed, you've been disconnected".inform;
-	~uid = Array.newClear(~numusr);
-	~n.sendBundle(0.2,['/off',~mip]);
+	~uid = Array.newClear(~numusr-1);
+	~n.sendBundle(0.2,['/off',~mip,~miusuario]);
 	~msgit=0;Server.freeAll
 };
 //

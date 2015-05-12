@@ -35,5 +35,5 @@
 (~url ++ "config/net_config.scd").load;
 (~url ++ "config/responders.scd").load;
 (~url ++ "gui/tweetensamble_input_gui.scd").load;
-//(~url ++ "gui/login_gui.scd").load;
+(~url ++ "gui/login_gui.scd").load;
 (~url ++ "gui/tweetensamble_gui.scd").load;
