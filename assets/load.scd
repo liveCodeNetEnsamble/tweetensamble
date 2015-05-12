@@ -23,7 +23,7 @@
 ~mip = nil;
 ~uid = nil;//lista de usuarios //no contiene usuario local
 ~othersip = nil;// array de ips de conectados
-~comparte = nil;//variable para compartir
+~comparte = "127.0.0.1";//en lo que se conexion
 //conexion local
 //~n = ();//array de netaddrs usuarios
 ~puerto=57120;//puerto base

@@ -118,6 +118,7 @@
 		if(~miusuario != nil,{
 			~n.sendBundle(0.1,['/ensamble',~miusuario,~mip,~puerto]);//envia tu nombre, ip, puerto a los demas
 			~usrlist.setString(~miusuario ++ ": "++ ~mip ++ "\n" ++ ~uid.join("\n"),0); //enlista usr con las ips conectadas
+			~msgmenu.items = ~uid;
 			~usrlist.setStringColor(Color.red,0,~miusuario.size);//colorea miusuario
 			~texto.string = "Compose and share your SCTweets";
 			~textoin.string = "Compose and share your SCTweets";
@@ -141,6 +142,7 @@
 		~usrlist.string = "";
 		~usrlist.setString(~miusuario ++ ": "++ ~mip ++ "\n" ++ ~uid.join("\n"),0);
 		~usrlist.setStringColor(Color.red,0,~miusuario.size);//colorea miusuario
+		~msgmenu.items = ~uid;
 	},{"Connect first, please.".warn;});
 });
 //ventana de entrada
@@ -225,13 +227,27 @@
             ~texto.select(0,140);//
 		});
 	});
-//mensaje personalizado
+//mensaje directo
 ~labelpop = StaticText(~w,Rect(237,298,240,12)).string_("Send / Receive direct Messages:");
 ~labelpop.background = Color.black;
 ~labelpop.stringColor = Color.cyan;
 ~msgmenu = PopUpMenu(~w,Rect(237,310,240,68)).background_(Color.cyan);
-~msgmenu.items = ~uid;
-
+//~msgmenu.items = ~uid;
+//ventana de entrada
+~outxt = Button(~w,Rect(355,385,113,40));
+~outxt.states_([
+    ["Open Output", Color.black, Color.cyan],
+	["Send Msg", Color.white, Color.green],
+	["Close", Color.cyan, Color.black]
+        ]);
+~outxt.action_({|val|
+		~comparte = ~othersip[~msgmenu.value];//
+	~direct.sendBundle(0.5,["/directo",~textout.string,~miusuario]);//envia mensaje con id
+	if(val.value == 0,{"cirou si".postln;(~url ++ "gui/tweetensamble_out_gui.scd").load;~outmsg.front});
+	if(val.value == 1,{"uno si".postln});
+	if(val.value == 2,{"sod si".postln})
+	};
+);
 //loggin a twitter
 ~outsct = Button(~w,Rect(507,385,113,40));
 ~outsct.states_([

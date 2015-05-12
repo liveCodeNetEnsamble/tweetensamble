@@ -71,16 +71,22 @@ OSCdef(\input, { |msg, time, addr, recvPort|
 		});
 },'/enviotodos').fix;
 ///
+OSCdef(\mensaje,{|msg, time, addr, recvPort|
+	//[msg, time, addr, recvPort].postln;
+	var desde = msg[2];
+		{
+			(~url +/+ "gui/tweetensamble_input_gui.scd").load;
+			~intxt.front;
+			~textoin.string = msg[1] ++ "\n//sent by @" ++ desde;
+		}.defer(0.1);
+},"/directo").fix;
+///
 OSCdef.trace(false);
 //
 // Help.gui;
 /*local debug
 ~n.sendBundle(0.2,['/off',nil,12]);//emula cierra ventana
-~n.sendBundle(0.2,['/ensamble',"dharma","192.168.2.2"]);//ingresa susario
+~n.sendBundle(0.2,['/ensamble',"dharma","192.168.2.5"]);//ingresa susario
 ~n.sendBundle(0.2,['/desconecta',"tabano","192.168.1.27"]);//borra usuario
 ~n.sendMsg('/enviotodos',"Este mensaje es para todos: blablablablabla...");//envia mensaje general
 ~n.sendBundle(0.1,['/enviotodos',"blablablablabla...",~miusuario]);//envia mensaje general
-//
-~uid
-~othersip
-*/
