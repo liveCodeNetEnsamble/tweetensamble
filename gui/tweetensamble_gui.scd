@@ -146,7 +146,7 @@
 	},{"Connect first, please.".warn;});
 });
 //ventana de entrada
-~inputxt = Button(~w,Rect(240,385,113,40));
+~inputxt = Button(~w,Rect(240,385,200,40));
 ~inputxt.states_([
             ["Open input", Color.black, Color.cyan],
 			["Close Input", Color.cyan, Color.black]
@@ -228,26 +228,60 @@
 		});
 	});
 //mensaje directo
-~labelpop = StaticText(~w,Rect(237,298,240,12)).string_("Send / Receive direct Messages:");
+~labelmsg = StaticText(~w,Rect(240,219,200,16)).string_("Send / Receive:");
+~labelmsg.background = Color.black;
+~labelmsg.stringColor = Color.cyan;
+~labelpop = StaticText(~w,Rect(240,237,200,12)).string_("Message to:");
 ~labelpop.background = Color.black;
 ~labelpop.stringColor = Color.cyan;
-~msgmenu = PopUpMenu(~w,Rect(237,310,240,68)).background_(Color.cyan);
+~msgmenu = PopUpMenu(~w,Rect(240,249,200,30)).background_(Color.cyan);
 //~msgmenu.items = ~uid;
-//ventana de entrada
-~outxt = Button(~w,Rect(355,385,113,40));
+~outxt = Button(~w,Rect(240,278,200,40));
 ~outxt.states_([
     ["Open Output", Color.black, Color.cyan],
-	["Send Msg", Color.white, Color.green],
+	["Send Msg to ...", Color.white, Color.green],
 	["Close", Color.cyan, Color.black]
         ]);
 ~outxt.action_({|val|
-		~comparte = ~othersip[~msgmenu.value];//
-	~direct.sendBundle(0.5,["/directo",~textout.string,~miusuario]);//envia mensaje con id
-	if(val.value == 0,{"cirou si".postln;(~url ++ "gui/tweetensamble_out_gui.scd").load;~outmsg.front});
-	if(val.value == 1,{"uno si".postln});
-	if(val.value == 2,{"sod si".postln})
-	};
-);
+	if(~conecta.value != 0,{
+		if(val.value == 0,{(~url ++ "gui/tweetensamble_out_gui.scd").load;~outmsg.front;
+			~comparte = ~othersip[~msgmenu.value];//relaciona array de lista con array de IPs
+		});
+		if(val.value == 1,{~direct.sendBundle(0.5,["/directo",~textout.string,~miusuario]);//envia mensaje con id
+		});
+		if(val.value == 2,{~outmsg.close});
+		},{
+			~outxt.value=0;
+			~texto.string = "Must be connected to message someone";
+			~numtxt.value = ~texto.string.size;
+			~textoin.string = "Must be connected to message someone";"Must be connected to message someone".postln;
+	});
+});
+//envio a todos
+~labelpop2 = StaticText(~w,Rect(240,327,200,12)).string_("Message All:");
+~labelpop2.background = Color.black;
+~labelpop2.stringColor = Color.cyan;
+~outxtall = Button(~w,Rect(240,339,200,40));
+~outxtall.states_([
+    ["Open Output", Color.black, Color.cyan],
+	["Send Msg All", Color.white, Color.green],
+	["Close", Color.cyan, Color.black]
+        ]);
+~outxtall.action_({|val|
+	if(~conecta.value != 0,{
+		if(val.value == 0,{(~url ++ "gui/tweetensamble_out_gui.scd").load;~outmsg.front;
+			~comparte = ~othersip[~msgmenu.value];//relaciona array de lista con array de IPs
+		});
+		if(val.value == 1,{~n.sendBundle(0.5,["/directo",~textout.string,~miusuario]);//envia mensaje con id
+		});
+		if(val.value == 2,{~outmsg.close});
+		},{
+			~outxtall.value=0;
+			~texto.string = "Must be connected to message someone";
+			~numtxt.value = ~texto.string.size;
+			~textoin.string = "Must be connected to message someone";"Must be connected to message someone".postln;
+	});
+});
 //loggin a twitter
 ~outsct = Button(~w,Rect(507,385,113,40));
 ~outsct.states_([
