@@ -1,4 +1,3 @@
 //done with tweetwensamble by nil
-play{f=Phasor.kr(Impulse.kr(0.01),1,60,20000);BPF.ar(LFPulse.ar({|i|[f/150,60*i]*i}.dup(4),0.5,0.01,0.01),f,0.5)!2}
-
+play{(1..8).collect({|i|x=(60..880);a=Impulse;t=TChoose;Pulse.ar(t.kr(a.kr(1/i),x)*i,0.5/i,0.5)+LFSaw.ar(t.kr(a.kr(4*i),x/2),0.1,0.5)})}; 
 //2015

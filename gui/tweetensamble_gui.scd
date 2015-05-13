@@ -149,14 +149,18 @@
 //ventana de entrada
 ~inputxt = Button(~w,Rect(240,385,200,40));
 ~inputxt.states_([
-            ["Open input", Color.black, Color.cyan],
-			["Close Input", Color.cyan, Color.black]
+            ["Open notes", Color.black, Color.cyan],
+			["Close notes", Color.cyan, Color.black]
         ]);
 ~inputxt.action_({|val|
-	if(val.value == 1,{(~url ++ "gui/tweetensamble_input_gui.scd").load;~intxt.front},{~intxt.close})};
+	if(val.value == 1,{
+		(~url ++ "gui/tweetensamble_input_gui.scd").load;
+		~intxt.front;
+		~textoin.editable_(true);
+	},{~intxt.close})};
 );
 //
-~labelbut3 = StaticText(~w,Rect(460,125,113,12)).string_("Select to eval");
+~labelbut3 = StaticText(~w,Rect(460,125,113,12)).string_("Select to eval").align_(\center);
 ~labelbut3.background = Color.black;
 ~labelbut3.stringColor = Color.cyan;
 ~selectbut = Button(~w,Rect(460,137,113,28))
@@ -170,7 +174,7 @@
 		});
 	});
 //
-~labelbut4 = StaticText(~w,Rect(460,170,113,12)).string_("Stop server");
+~labelbut4 = StaticText(~w,Rect(460,170,113,12)).string_("Stop server").align_(\center);
 ~labelbut4.background = Color.black;
 ~labelbut4.stringColor = Color.cyan;
 ~stopbut = Button(~w,Rect(460,181,113,28))
@@ -183,7 +187,7 @@
 		});
 	});
 //
-~labelbut = StaticText(~w,Rect(460,296,113,12)).string_("Text to All Users");
+~labelbut = StaticText(~w,Rect(460,296,113,12)).string_("Text to All Users").align_(\center);
 ~labelbut.background = Color.black;
 ~labelbut.stringColor = Color.cyan;
 ~selectsend = Button(~w,Rect(460,307,113,28))
@@ -201,7 +205,7 @@
 		});
 	});
 //
-~labelbut2 = StaticText(~w,Rect(460,340,113,12)).string_("Text to File");
+~labelbut2 = StaticText(~w,Rect(460,340,113,12)).string_("Text to File").align_(\center);
 ~labelbut2.background = Color.black;
 ~labelbut2.stringColor = Color.cyan;
 ~selectsave = Button(~w,Rect(460,352,113,28))
