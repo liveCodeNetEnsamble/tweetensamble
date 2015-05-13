@@ -3,9 +3,9 @@
 //
 //GUI componer y compartir
 (
-~w = Window("TweetEnsamble - Collaborative sctweets",Rect.aboutPoint(Window.screenBounds.center,320,220),false,scroll:false).front;
+~w = Window("TweetEnsamble - Collaborative sctweets",Rect.aboutPoint(Window.screenBounds.center,295,220),false,scroll:false).front;
 //SCTweet
-~texto = TextView(~w.asView,Rect(20,20,600,100)).background_(Color.cyan).focus(true);
+~texto = TextView(~w.asView,Rect(20,20,553,100)).background_(Color.cyan).focus(true);
 ~texto.setFont(Font("Khmer OS System",24,true,false),0,140);
 ~texto.string = "Write, share and evaluate SCtweets here ...";
 ~texto.syntaxColorize(true);
@@ -14,6 +14,7 @@
 ~numlabel = StaticText(~w,Rect(20,125,150,20)).string = "participants: (max 5)";
 ~numlabel.background = Color.black;
 ~numlabel.stringColor = Color.cyan;
+~numlabel.align_(\center);
 ~num = NumberBox(~w,Rect(170,125,50,20)).background = Color.cyan;
 ~num.clipLo = 2;
 ~num.clipHi = 5;
@@ -155,10 +156,10 @@
 	if(val.value == 1,{(~url ++ "gui/tweetensamble_input_gui.scd").load;~intxt.front},{~intxt.close})};
 );
 //
-~labelbut3 = StaticText(~w,Rect(507,125,113,12)).string_("Select to eval");
+~labelbut3 = StaticText(~w,Rect(460,125,113,12)).string_("Select to eval");
 ~labelbut3.background = Color.black;
 ~labelbut3.stringColor = Color.cyan;
-~selectbut = Button(~w,Rect(507,137,113,28))
+~selectbut = Button(~w,Rect(460,137,113,28))
         .states_([
             ["Evaluate 140", Color.black, Color.cyan],
         ])
@@ -169,10 +170,10 @@
 		});
 	});
 //
-~labelbut4 = StaticText(~w,Rect(507,170,113,12)).string_("Stop server");
+~labelbut4 = StaticText(~w,Rect(460,170,113,12)).string_("Stop server");
 ~labelbut4.background = Color.black;
 ~labelbut4.stringColor = Color.cyan;
-~stopbut = Button(~w,Rect(507,181,113,28))
+~stopbut = Button(~w,Rect(460,181,113,28))
         .states_([
             ["Kill that Noise", Color.black, Color.cyan],
         ])
@@ -182,10 +183,10 @@
 		});
 	});
 //
-~labelbut = StaticText(~w,Rect(507,296,113,12)).string_("Text to All Users");
+~labelbut = StaticText(~w,Rect(460,296,113,12)).string_("Text to All Users");
 ~labelbut.background = Color.black;
 ~labelbut.stringColor = Color.cyan;
-~selectsend = Button(~w,Rect(507,307,113,28))
+~selectsend = Button(~w,Rect(460,307,113,28))
         .states_([
             ["Select 140 chars", Color.black, Color.cyan],
 			["Send to all", Color.black, Color.green]
@@ -200,10 +201,10 @@
 		});
 	});
 //
-~labelbut2 = StaticText(~w,Rect(507,340,113,12)).string_("Text to File");
+~labelbut2 = StaticText(~w,Rect(460,340,113,12)).string_("Text to File");
 ~labelbut2.background = Color.black;
 ~labelbut2.stringColor = Color.cyan;
-~selectsave = Button(~w,Rect(507,352,113,28))
+~selectsave = Button(~w,Rect(460,352,113,28))
         .states_([
             ["Select 140 chars", Color.black, Color.cyan],
 			["Save to file", Color.black, Color.green]
@@ -228,28 +229,29 @@
 		});
 	});
 //mensaje directo
-~labelmsg = StaticText(~w,Rect(240,219,200,16)).string_("Send / Receive:");
+~labelmsg = StaticText(~w,Rect(240,219,200,16)).string_("Send / Receive").align_(\center);
 ~labelmsg.background = Color.black;
 ~labelmsg.stringColor = Color.cyan;
-~labelpop = StaticText(~w,Rect(240,237,200,12)).string_("Message to:");
+~labelpop = StaticText(~w,Rect(240,239,200,12)).string_("Message to:");
 ~labelpop.background = Color.black;
 ~labelpop.stringColor = Color.cyan;
-~msgmenu = PopUpMenu(~w,Rect(240,249,200,30)).background_(Color.cyan);
+~msgmenu = PopUpMenu(~w,Rect(240,251,200,30)).background_(Color.cyan);
 //~msgmenu.items = ~uid;
-~outxt = Button(~w,Rect(240,278,200,40));
+~outxt = Button(~w,Rect(240,280,200,40));
 ~outxt.states_([
     ["Open Output", Color.black, Color.cyan],
 	["Send Msg to ...", Color.white, Color.green],
 	["Close", Color.cyan, Color.black]
         ]);
 ~outxt.action_({|val|
-	if(~conecta.value != 0,{
-		if(val.value == 0,{(~url ++ "gui/tweetensamble_out_gui.scd").load;~outmsg.front;
+	if(~conecta.value != 0,{//
+		if(val.value == 1,{
 			~comparte = ~othersip[~msgmenu.value];//relaciona array de lista con array de IPs
+			(~url ++ "gui/tweetensamble_out_gui.scd").load;~outmsg.front;
 		});
-		if(val.value == 1,{~direct.sendBundle(0.5,["/directo",~textout.string,~miusuario]);//envia mensaje con id
+		if(val.value == 2,{~direct.sendBundle(0.5,["/directo",~textout.string,~miusuario,"uno"]);//envia mensaje con id
 		});
-		if(val.value == 2,{~outmsg.close});
+		if(val.value == 0,{~outmsg.close});
 		},{
 			~outxt.value=0;
 			~texto.string = "Must be connected to message someone";
@@ -269,21 +271,20 @@
         ]);
 ~outxtall.action_({|val|
 	if(~conecta.value != 0,{
-		if(val.value == 0,{(~url ++ "gui/tweetensamble_out_gui.scd").load;~outmsg.front;
-			~comparte = ~othersip[~msgmenu.value];//relaciona array de lista con array de IPs
+		if(val.value == 1,{(~url ++ "gui/tweetensamble_out_gui.scd").load;~outmsg.front;
 		});
-		if(val.value == 1,{~n.sendBundle(0.5,["/directo",~textout.string,~miusuario]);//envia mensaje con id
+		if(val.value == 2,{~n.sendBundle(0.5,["/directo",~textout.string,~miusuario,"todos"]);//envia mensaje con id
 		});
-		if(val.value == 2,{~outmsg.close});
+		if(val.value == 0,{~outmsg.close});
 		},{
 			~outxtall.value=0;
-			~texto.string = "Must be connected to message someone";
+			~texto.string = "Must be connected to message everybody";
 			~numtxt.value = ~texto.string.size;
-			~textoin.string = "Must be connected to message someone";"Must be connected to message someone".postln;
+			~textoin.string = "Must be connected to message everybody";"Must be connected to message everybody".postln;
 	});
 });
 //loggin a twitter
-~outsct = Button(~w,Rect(507,385,113,40));
+~outsct = Button(~w,Rect(460,385,113,40));
 ~outsct.states_([
             ["Post SCTweet", Color.black, Color.green],
 			["Close Browser", Color.green, Color.black]
@@ -299,7 +300,7 @@
 	);
 });
 //cuenta de letras
-~numtxt = NumberBox(~w,Rect(587,100,33,20));
+~numtxt = NumberBox(~w,Rect(540,100,33,20));
 ~numtxt.background_(Color.green);
 ~numtxt.value = ~texto.string.size;
 //acciones
