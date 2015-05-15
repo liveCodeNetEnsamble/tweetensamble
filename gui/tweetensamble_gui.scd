@@ -155,9 +155,8 @@
 ~inputxt.action_({|val|
 	if(val.value == 1,{
 		(~url ++ "gui/tweetensamble_input_gui.scd").load;
-		~intxt.front;
-		~textoin.editable_(true);
-	},{~intxt.close})};
+		~notas.front;
+	},{~notas.close})};
 );
 //
 ~labelbut3 = StaticText(~w,Rect(460,125,113,12)).string_("Select to eval").align_(\center);
@@ -165,7 +164,7 @@
 ~labelbut3.stringColor = Color.cyan;
 ~selectbut = Button(~w,Rect(460,137,113,28))
         .states_([
-            ["Evaluate 140", Color.black, Color.cyan],
+            ["Evaluate 140", Color.black, Color.green],
         ])
         .action_({|butt|
 		if(butt.value == 0, {
@@ -179,7 +178,7 @@
 ~labelbut4.stringColor = Color.cyan;
 ~stopbut = Button(~w,Rect(460,181,113,28))
         .states_([
-            ["Kill that Noise", Color.black, Color.cyan],
+            ["Kill that Noise", Color.black, Color.red],
         ])
         .action_({|butt|
 		if(butt.value == 0, {
@@ -295,9 +294,10 @@
         ]);
 ~outsct.action_({|val|
 	if(val.value == 1,{
-			(~url ++ "gui/login_gui.scd").load;
-			~web.front;
-			{~web.name=~browser.title}.defer(3);
+		(~url ++ "gui/login_gui.scd").load;
+		~web.front;
+		//~server = "tweetensamble.mixfuckedup.net";
+		{~web.name=~browser.title}.defer(3);
 		},{
 			~web.close
 		}
