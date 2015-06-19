@@ -1,8 +1,9 @@
-//LiveCodeNet Ensamble
-//crea, coolabora, comparte tus SCtweets
-/////////////////////////////////////
+//==========================================
+// LiveCodeNet Ensamble
+// Crea, coolabora, comparte tus SCtweets
 //Se necesita conexion a internet
-////////////////////////////////////
+//==========================================
+
 //Evalua la siguiente funcion:
 (
 s.waitForBoot {
