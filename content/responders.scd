@@ -88,3 +88,4 @@ OSCdef.trace(false);
 ~n.sendBundle(0.2,['/off',nil,12]);//emula cierra ventana
 ~n.sendBundle(0.2,['/ensamble',"dharma","192.168.2.5"]);//ingresa usario
 ~n.sendBundle(0.2,['/desconecta',"tabano","192.168.1.27"]);//borra usuario
+*/
