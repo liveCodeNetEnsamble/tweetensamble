@@ -1,10 +1,10 @@
 //==========================================
 // LiveCodeNet Ensamble
-// Crea, coolabora, comparte tus SCtweets
-//Se necesita conexion a internet
+// Crea, colabora y comparte tus SCtweets
+// Se necesita conexión a internet
 //==========================================
 
-//Evalua la siguiente funcion:
+// Evalua la siguiente función:
 (
 s.waitForBoot {
 ///////////Configura la ruta del directorio de 'tweetensamble'///////////
