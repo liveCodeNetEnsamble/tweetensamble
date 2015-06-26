@@ -7,11 +7,10 @@
 // Evalua la siguiente función:
 (
 s.waitForBoot {
-///////////Configura la ruta del directorio de 'tweetensamble'///////////
+// 1. Configura la ruta del directorio de 'tweetensamble'//
 	~url="/home/josecaos/Documents/tweetensamble/";
-	///////Y Evalua la funcion//////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////
-	////////////no editar/////////////////////////////////////////////////
+// 2. Evalua la función //
+// No edites la siguiente línea de código //
 	(~url ++ "content/load.scd").load;
 	}
 );
