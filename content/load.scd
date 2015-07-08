@@ -1,6 +1,6 @@
 //LiveCodeNet Ensamble
 //crea, coolabora, comparte tus SCtweets
-//variables globales e inicializacion
+//variables globales e inicialización
 /////////al iniciar://////////
 11.do{|i=1|
 	var x = (i/16);
