@@ -106,14 +106,14 @@
 				["Disconnect", Color.cyan, Color.black]
         ]);
 ~conecta.action_({|butt|
-	if(butt.value == 0, {//resetea valores de usuario
+	if(butt.value == 0, { //resetea valores de usuario
 		~usrlist.string  = "";
-		//~miusuario=nil;
-		~mip=nil;
 		~texto.string = "You've been disconnected from ensamble list + your code deleted";
 		~textoin.string = "You've been disconnected from ensamble list + your code deleted";
 		~numtxt.value = ~texto.string.size;
-		~n.sendBundle(0.2,['/desconecta',~miusuario,~mip]);//
+		~n.sendBundle(0.2,['/desconecta',~miusuario,~mip]);// envio mis datos para borrar de la lista de los demas
+		~mip=nil;
+		~miusuario=nil;
 	});
 	if(butt.value == 1, {
 		if(~miusuario != nil,{
@@ -249,7 +249,7 @@
 ~outxt.action_({|val|
 	if(~conecta.value != 0,{//
 		if(val.value == 1,{
-			~comparte = ~othersip[~msgmenu.value];//relaciona array de lista con array de IPs
+			~comparte = ~othersip[~msgmenu.value];// relaciona array de lista con array de IPs
 			(~url ++ "gui/tweetensamble_out_gui.scd").load;~outmsg.front;
 		});
 		if(val.value == 2,{~direct.sendBundle(0.5,["/directo",~textout.string,~miusuario,"uno"]);//envia mensaje con id

@@ -35,8 +35,8 @@ OSCdef(\exit, { |msg, time, addr, recvPort|
 		~intxt.front;
 		~textoin.string = "User " ++ "'" ++ msg[1] ++ "'" ++ " is now offline ";
 	}.defer(0.5);
-		4.do{("User " ++ msg[1] ++ " is now offline ").inform};//lista llena
-		index = ~uid.find([msg[1],msg[2]].join(": "));//busca la ip
+	4.do{("User " ++ msg[1] ++ " is now offline ").inform};//lista llena
+	index = ~uid.find([msg[1],msg[2]].join(": "));//busca en el array de usuarios -> [ursname: ip]
 		if(index != nil,{
 			~othersip.put(index,nil);
 			~uid.put(index,nil);

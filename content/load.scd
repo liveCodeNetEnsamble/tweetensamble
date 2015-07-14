@@ -22,8 +22,8 @@
 ~miusuario = nil;//mi nombre
 ~mip = nil;
 ~uid = nil;//lista de usuarios //no contiene usuario local
-~othersip = nil;// array de ips de conectados
-~comparte = "127.0.0.1";//en lo que se conexion
+~othersip = nil;// array de ips de usuarios conectados
+~comparte = nil;//se iguala
 //conexion local
 //~n = ();//array de netaddrs usuarios
 ~puerto = 57120;//puerto base
