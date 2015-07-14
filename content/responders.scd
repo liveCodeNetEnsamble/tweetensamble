@@ -6,7 +6,7 @@ OSCdef(\usrs, { |msg, time, addr, recvPort|
 	var maxitems,yo;
 	yo = msg[1];
 	maxitems = ~uid.size;
-	if(yo.asString != ~miusuario,{//evito duplicarme
+	if(yo.asString != ~miusuario,{ //evito duplicarme
 		if(~msgit > maxitems,{//si la lista esta llena
 			("Users list full, User " ++ "'" ++ msg[1] ++ "'" ++ " wasn't added, maybe if someone disconnects").inform;//lista llena
 			{(~url +/+ "gui/tweetensamble_input_gui.scd").load;

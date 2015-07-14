@@ -16,7 +16,7 @@
 ////////////////////
 //iteradores
 ~fileit = 0 ;//guarda archivos con distinto nombre
-~msgit = 0;//llena array de usuarios
+~msgit = 0;// llena array de usuarios
 //ususarios
 ~numusr = 0;//numero de usuarios,localhost siempre es index 0
 ~miusuario = nil;//mi nombre

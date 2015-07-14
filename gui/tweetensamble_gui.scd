@@ -119,7 +119,7 @@
 		if(~miusuario != nil,{
 			~n.sendBundle(0.1,['/ensamble',~miusuario,~mip,~puerto]);//envia tu nombre, ip, puerto a los demas
 			~usrlist.setString(~miusuario ++ ": "++ ~mip ++ "\n" ++ ~uid.join("\n"),0); //enlista usr con las ips conectadas
-			~msgmenu.items = ~uid;
+			~msgmenu.items = ~uid; //  enlista los usuarios en el menu de mensaue
 			~usrlist.setStringColor(Color.red,0,~miusuario.size);//colorea miusuario
 			~texto.string = "Compose and share your SCTweets";
 			~textoin.string = "Compose and share your SCTweets";
@@ -262,7 +262,7 @@
 			~textoin.string = "Must be connected to message someone";"Must be connected to message someone".postln;
 	});
 });
-//envio a todos
+//envia mensaje a todos
 ~labelpop2 = StaticText(~w,Rect(240,327,200,12)).string_("Message All:");
 ~labelpop2.background = Color.black;
 ~labelpop2.stringColor = Color.cyan;
@@ -280,7 +280,7 @@
 		});
 		if(val.value == 0,{~outmsg.close});
 		},{
-			~outxtall.value=0;
+			~outxtall.value=nil;
 			~texto.string = "Must be connected to message everybody";
 			~numtxt.value = ~texto.string.size;
 			~textoin.string = "Must be connected to message everybody";"Must be connected to message everybody".postln;
@@ -326,9 +326,10 @@
 //cuando se cierra la ventana
 ~w.onClose = {
 	"window is closed, you've been disconnected".inform;
-	~uid = Array.newClear(~numusr-1);
+	~uid = Array.newClear(~numusr -1);
+	~othersip = Array.newClear(~numusr -1);
 	~n.sendBundle(0.2,['/off',~mip,~miusuario]);
-	~msgit=0;Server.freeAll
+	~msgit=0;Server.freeAll;
 };
 //
 "\nGUI Ok!".inform;
