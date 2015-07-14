@@ -26,7 +26,7 @@ OSCdef(\usrs, { |msg, time, addr, recvPort|
 	},{
 			//"ya no me auto agrego".postln
 	});
-	~msgit = ~msgit + 1;
+	~msgit = ~msgit - 1;
 },'/ensamble').fix;
 //////elimina usuario al desconectarse/////////
 OSCdef(\exit, { |msg, time, addr, recvPort|
