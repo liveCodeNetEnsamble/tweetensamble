@@ -70,7 +70,7 @@ OSCdef(\input, { |msg, time, addr, recvPort|
 			}.defer(0.1);
 		});
 },'/enviotodos').fix;
-///
+///envia mensaje directo
 OSCdef(\mensaje,{|msg, time, addr, recvPort|
 	//[msg, time, addr, recvPort].postln;
 	var desde = msg[2];
@@ -79,8 +79,18 @@ OSCdef(\mensaje,{|msg, time, addr, recvPort|
 			~intxt.front;
 			~textoin.string = msg[1] ++ "\n//sent by @" ++ desde;
 		}.defer(0.1);
-},"/directo").fix;
-///
+},'/directo').fix;
+///activa la evaluacion en grupo
+OSCdef(\evaltodos,{|msg,time,addr,recvPort|
+	var usr = msg[2];
+	msg[1].string.interpretPrint;
+		{
+			(~url +/+ "gui/tweetensamble_input_gui.scd").load;
+			~intxt.front;
+		~textoin.string = msg[1] ++ "\n//evaluated by @" ++ usr ++ "with this IP: " ++ msg[3];
+		}.defer(0.1);
+},'/evaltodos');
+//
 OSCdef.trace(false);
 //
 // Help.gui;

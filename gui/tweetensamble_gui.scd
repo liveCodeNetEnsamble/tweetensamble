@@ -158,8 +158,8 @@
 		~notas.front;
 	},{~notas.close})};
 );
-//
-~labelbut3 = StaticText(~w,Rect(460,125,113,12)).string_("Select to eval").align_(\center);
+//evalua solo
+~labelbut3 = StaticText(~w,Rect(460,125,113,12)).string_("Eval local").align_(\center);
 ~labelbut3.background = Color.black;
 ~labelbut3.stringColor = Color.cyan;
 ~selectbut = Button(~w,Rect(460,137,113,28))
@@ -183,6 +183,20 @@
         .action_({|butt|
 		if(butt.value == 0, {
 			Server.freeAll;
+		});
+	});
+//evalua a todos los conectados
+~labelbutevall = StaticText(~w,Rect(330,125,113,12)).string_("Eval to all").align_(\center);
+~labelbutevall.background = Color.black;
+~labelbutevall.stringColor = Color.cyan;
+~evaltodos = Button(~w,Rect(330,137,113,28))
+        .states_([
+            ["Eval Everyone", Color.black, Color.green],
+        ])
+        .action_({|butt|
+		if(butt.value == 0, {
+		  var texto =  ~texto.select(0,140);
+		 ~n.sendBundle(0.001,['\evaltodos',texto,~miusuario,~mip]);//enviar el codigo y despues evaluarlo
 		});
 	});
 //
