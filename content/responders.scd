@@ -82,13 +82,19 @@ OSCdef(\mensaje,{|msg, time, addr, recvPort|
 },'/directo').fix;
 ///activa la evaluacion en grupo
 OSCdef(\evaltodos,{|msg,time,addr,recvPort|
-	var usr = msg[2];
-	msg[1].string.interpretPrint;
+	var usr = msg[3];
+	if(msg[1] == 0, {
+	    msg[2].string.interpretPrint;
 		{
 			(~url +/+ "gui/tweetensamble_input_gui.scd").load;
 			~intxt.front;
-		~textoin.string = msg[1] ++ "\n//evaluated by @" ++ usr ++ "with this IP: " ++ msg[3];
+			~textoin.string = msg[2] ++ "\n//evaluated by @" ++ usr ++ "with this IP: " ++ msg[4];
 		}.defer(0.1);
+	});
+	if(msg[1] == 1,{
+		Server.freeAll;
+	})
+
 },'/evaltodos');
 //
 OSCdef.trace(false);

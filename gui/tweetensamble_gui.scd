@@ -172,7 +172,7 @@
 			~texto.string.interpretPrint;
 		});
 	});
-//
+//para servidor local
 ~labelbut4 = StaticText(~w,Rect(460,170,113,12)).string_("Stop server").align_(\center);
 ~labelbut4.background = Color.black;
 ~labelbut4.stringColor = Color.cyan;
@@ -186,9 +186,9 @@
 		});
 	});
 //evalua a todos los conectados
-~labelbutevall = StaticText(~w,Rect(330,125,113,12)).string_("Eval to all").align_(\center);
-~labelbutevall.background = Color.black;
-~labelbutevall.stringColor = Color.cyan;
+~labelevall = StaticText(~w,Rect(330,125,113,12)).string_("Eval to all").align_(\center);
+~labelevall.background = Color.black;
+~labelevall.stringColor = Color.cyan;
 ~evaltodos = Button(~w,Rect(330,137,113,28))
         .states_([
             ["Eval Everyone", Color.black, Color.green],
@@ -196,7 +196,20 @@
         .action_({|butt|
 		if(butt.value == 0, {
 		  var texto =  ~texto.select(0,140);
-		 ~n.sendBundle(0.001,['\evaltodos',texto,~miusuario,~mip]);//enviar el codigo y despues evaluarlo
+		 ~n.sendBundle(0.001,['\evaltodos',0,texto,~miusuario,~mip]);//envia el codigo y despues evaluarlo
+		});
+	});
+//
+~labelstopall = StaticText(~w,Rect(330,170,113,12)).string_("Stop everyone").align_(\center);
+~labelstopall.background = Color.black;
+~labelstopall.stringColor = Color.cyan;
+~stopall = Button(~w,Rect(330,181,113,28))
+        .states_([
+            ["Kill those Noises", Color.black, Color.red],
+        ])
+        .action_({|butt|
+		if(butt.value == 0, {
+		    ~n.sendBundle(0.001,['\evaltodos',1,~miusuario]);
 		});
 	});
 //
