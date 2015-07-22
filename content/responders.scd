@@ -17,14 +17,13 @@ OSCdef(\usrs, { |msg, time, addr, recvPort|
 			},{
 				var index = ~uid.find([nil]);
 				var vivo = ~othersip.find([msg[2]]);
-				if(vivo != nil,{
+				vivo.postcln;
 					~uid.put(index,[msg[1],msg[2]].join(": "));//une nombre + ip
 					~othersip.put(index,msg[2]);//agrega solo IP en mismo index que lista
 					{(~url +/+ "gui/tweetensamble_input_gui.scd").load;
 						~intxt.front;
 						~textoin.string = "User " ++ "'" ++ msg[1] ++ "'" ++ " was added to the list";
 					}.defer(0.1);
-				});
 		});
 	},{
 			//"ya no me auto agrego".postln
