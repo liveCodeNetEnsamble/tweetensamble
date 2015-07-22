@@ -1,7 +1,6 @@
 #evita sctweets generados en pruebas
 sctweets/*
-##
 #archivos invisibles
 *.scd~
 *.rtf~
-#tweetensamble.scd#
+tweetensamble.scd
