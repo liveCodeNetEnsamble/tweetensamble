@@ -84,11 +84,12 @@ OSCdef(\mensaje,{|msg, time, addr, recvPort|
 OSCdef(\evaltodos,{|msg,time,addr,recvPort|
 	var usr = msg[3];
 	if(msg[1] == 0, {
-	    msg[2].string.interpretPrint;
+		msg[2].postcln;
+	    msg[2].interpretPrint;
 		{
 			(~url +/+ "gui/tweetensamble_input_gui.scd").load;
 			~intxt.front;
-			~textoin.string = msg[2] ++ "\n//evaluated by @" ++ usr ++ "with this IP: " ++ msg[4];
+			~textoin.string = msg[2] ++ "\n//evaluated by @" ++ usr ++ " with this IP: " ++ msg[4];
 		}.defer(0.1);
 	});
 	if(msg[1] == 1,{

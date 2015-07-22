@@ -196,7 +196,7 @@
         .action_({|butt|
 		if(butt.value == 0, {
 		  var texto =  ~texto.select(0,140);
-		 ~n.sendBundle(0.001,['\evaltodos',0,texto,~miusuario,~mip]);//envia el codigo y despues evaluarlo
+		 ~n.sendBundle(0.001,['\evaltodos',0,~texto.string,~miusuario,~mip]);//envia el codigo y despues evaluarlo
 		});
 	});
 //
