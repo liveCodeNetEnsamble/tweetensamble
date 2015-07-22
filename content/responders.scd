@@ -16,18 +16,23 @@ OSCdef(\usrs, { |msg, time, addr, recvPort|
 			~msgit = ~uid.size-1;
 			},{
 				var index = ~uid.find([nil]);
-				~uid.put(index,[msg[1],msg[2]].join(": "));//une nombre + ip
-				~othersip.put(index,msg[2]);//agrega solo IP en mismo index que lista
-				{(~url +/+ "gui/tweetensamble_input_gui.scd").load;
-					~intxt.front;
-					~textoin.string = "User " ++ "'" ++ msg[1] ++ "'" ++ " was added to the list";
-				}.defer(0.1);
+				var vivo = ~othersip.find(msg[2]);
+				if(vivo != nil,{
+					~uid.put(index,[msg[1],msg[2]].join(": "));//une nombre + ip
+					~othersip.put(index,msg[2]);//agrega solo IP en mismo index que lista
+					{(~url +/+ "gui/tweetensamble_input_gui.scd").load;
+						~intxt.front;
+						~textoin.string = "User " ++ "'" ++ msg[1] ++ "'" ++ " was added to the list";
+					}.defer(0.1);
+				});
 		});
 	},{
 			//"ya no me auto agrego".postln
 	});
 	~msgit = ~msgit - 1;
 },'/ensamble').fix;
+~n.sendBundle(0.1,['/ensamble',~miusuario,~mip,~puerto]);//envia tu nombre, ip, puerto a los demas
+~uid.posctln;
 //////elimina usuario al desconectarse/////////
 OSCdef(\exit, { |msg, time, addr, recvPort|
 	var index;
