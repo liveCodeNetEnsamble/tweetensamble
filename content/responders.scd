@@ -39,11 +39,11 @@ OSCdef(\exit, { |msg, time, addr, recvPort|
 		~textoin.string = "User " ++ "'" ++ msg[1] ++ "'" ++ " is now offline ";
 	}.defer(0.5);
 	4.do{("User " ++ msg[1] ++ " is now offline ").inform};//lista llena
-	index = ~uid.find([msg[1],msg[2]].join(": "));//busca en el array de usuarios -> [ursname: ip]
-		if(index != nil,{
+	index = ~othersip.find([msg[2]]); //~uid.find([msg[1],msg[2]].join(": "));//busca en el array de usuarios -> [ursname: ip]
+		//if(index != nil,{
 			~othersip.put(index,nil);
 			~uid.put(index,nil);
-		});
+		//});
 },'/desconecta').fix;
 //////elimina usuario al cerrar applicacion
 OSCdef(\close, { |msg, time, addr, recvPort|
@@ -53,10 +53,10 @@ OSCdef(\close, { |msg, time, addr, recvPort|
 		},{
 			4.do{("User" ++ "'" ++ msg[2] ++ "'" ++ " is now disconnected ").inform};//lista llena
 			indx = ~othersip.find([msg[1]]);
-			if(indx != nil,{
+			//if(indx != nil,{
 				~othersip.put(indx,nil);
 				~uid.put(indx,nil);
-				});
+				//});
 	});
 },'/off').fix;
 //////envia texto a todos/////////
