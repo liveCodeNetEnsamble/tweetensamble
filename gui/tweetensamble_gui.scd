@@ -278,9 +278,10 @@
 	if(~conecta.value != 0,{//
 		if(val.value == 1,{
 			~comparte = ~othersip[~msgmenu.value];// relaciona array de lista con array de IPs
-			(~url ++ "gui/tweetensamble_out_gui.scd").load;~outmsg.front;
+			(~url ++ "gui/tweetensamble_out_gui.scd").load;
+			~outmsg.front;
 		});
-		if(val.value == 2,{~direct.sendBundle(0.5,["/directo",~textout.string,~miusuario,"uno"]);//envia mensaje con id
+		if(val.value == 2,{~direct.sendBundle(0.1,['/directo',~textout.string,~miusuario,"uno"]);//envia mensaje con id
 		});
 		if(val.value == 0,{~outmsg.close});
 		},{
