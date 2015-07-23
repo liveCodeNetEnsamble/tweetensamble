@@ -1,7 +1,10 @@
+//=======================================
 //LiveCodeNet Ensamble
 //crea, coolabora, comparte tus SCtweets
 //OSC responders
-//////responde a nombre de usuario/////////
+//=======================================
+
+// Responde a nombre de usuario
 OSCdef(\usrs, { |msg, time, addr, recvPort|
 	var maxitems,yo;
 	yo = msg[1];
@@ -31,7 +34,8 @@ OSCdef(\usrs, { |msg, time, addr, recvPort|
 	});
 	~msgit = ~msgit - 1;
 },'/ensamble').fix;
-//////elimina usuario al desconectarse/////////
+
+// Elimina usuario al desconectarse
 OSCdef(\exit, { |msg, time, addr, recvPort|
 	var index;
 	{(~url +/+ "gui/tweetensamble_input_gui.scd").load;
@@ -45,7 +49,8 @@ OSCdef(\exit, { |msg, time, addr, recvPort|
 			~uid.put(index,nil);
 		//});
 },'/desconecta').fix;
-//////elimina usuario al cerrar applicacion
+
+// Elimina usuario al cerrar applicacion
 OSCdef(\close, { |msg, time, addr, recvPort|
 	var indx;
 			4.do{("User" ++ "'" ++ msg[2] ++ "'" ++ " is now disconnected ").inform};//lista llena
@@ -55,7 +60,8 @@ OSCdef(\close, { |msg, time, addr, recvPort|
 				~uid.put(indx,nil);
 				//});
 },'/off').fix;
-//////envia texto a todos/////////
+
+// Envia texto a todos
 OSCdef(\input, { |msg, time, addr, recvPort|
 	//[msg, time, addr, recvPort].postln;
 	var quien = msg[2];
@@ -69,7 +75,8 @@ OSCdef(\input, { |msg, time, addr, recvPort|
 			}.defer(0.1);
 		});
 },'/enviotodos').fix;
-///envia mensaje directo
+
+// Envia mensaje directo
 OSCdef(\mensaje,{|msg, time, addr, recvPort|
 	//[msg, time, addr, recvPort].postln;
 	var desde = msg[2];
@@ -79,7 +86,8 @@ OSCdef(\mensaje,{|msg, time, addr, recvPort|
 			~textoin.string = msg[1] ++ "\n//sent by @" ++ desde;
 		}.defer(0.1);
 },'/directo').fix;
-///activa la evaluacion en grupo
+
+// Activa la evaluacion en grupo
 OSCdef(\evaltodos,{|msg,time,addr,recvPort|
 	var usr = msg[3];
 	if(msg[1] == 0, {
@@ -96,6 +104,7 @@ OSCdef(\evaltodos,{|msg,time,addr,recvPort|
 	})
 
 },'/evaltodos');
+
 //
 OSCdef.trace(false);
 //
@@ -104,4 +113,8 @@ OSCdef.trace(false);
 ~n.sendBundle(0.2,['/off',nil,12]);//emula cierra ventana
 ~n.sendBundle(0.2,['/ensamble',"dharma","192.168.2.5"]);//ingresa usario
 ~n.sendBundle(0.2,['/desconecta',"tabano","192.168.1.27"]);//borra usuario
+*/
+/*
+// proxima rutina para mandar bundle
+Routine{}
 */
