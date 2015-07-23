@@ -144,6 +144,7 @@
 		~usrlist.setString(~miusuario ++ ": "++ ~mip ++ "\n" ++ ~uid.join("\n"),0);
 		~usrlist.setStringColor(Color.red,0,~miusuario.size);//colorea miusuario
 		~msgmenu.items = ~uid;//agrega a la lista de mensajes directos
+		~n.sendBundle(0.1,['/ensamble',~miusuario,~mip,~puerto]); // manda status de conexion
 	},{"Connect first, please.".warn;});
 });
 //ventana de entrada
