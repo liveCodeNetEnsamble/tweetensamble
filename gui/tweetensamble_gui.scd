@@ -277,7 +277,7 @@
 ~outxt.action_({|val|
 	if(~conecta.value != 0,{//
 		if(val.value == 1,{
-			~comparte = ~othersip[~msgmenu.value];// relaciona array de lista con array de IPs
+			~comparte = ~othersip[~msgmenu.value];// relaciona array de lista con array de IP
 			(~url ++ "gui/tweetensamble_out_gui.scd").load;
 			~outmsg.front;
 		});
