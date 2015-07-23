@@ -358,7 +358,8 @@
 	~uid = Array.newClear(~numusr -1);
 	~othersip = Array.newClear(~numusr -1);
 	~n.sendBundle(0.2,['/off',~mip,~miusuario]);
-	~msgit=0;Server.freeAll;
+	~msgit=0;
+	Server.freeAll;
 };
 //
 "\nGUI Ok!".inform;

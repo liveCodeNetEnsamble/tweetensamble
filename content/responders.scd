@@ -48,16 +48,12 @@ OSCdef(\exit, { |msg, time, addr, recvPort|
 //////elimina usuario al cerrar applicacion
 OSCdef(\close, { |msg, time, addr, recvPort|
 	var indx;
-	if(msg[2] == ~miusuario,{
-			//aqui no hace nada
-		},{
 			4.do{("User" ++ "'" ++ msg[2] ++ "'" ++ " is now disconnected ").inform};//lista llena
 			indx = ~othersip.find([msg[1]]);
 			//if(indx != nil,{
 				~othersip.put(indx,nil);
 				~uid.put(indx,nil);
 				//});
-	});
 },'/off').fix;
 //////envia texto a todos/////////
 OSCdef(\input, { |msg, time, addr, recvPort|
