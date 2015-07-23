@@ -143,7 +143,7 @@
 		~usrlist.string = "";
 		~usrlist.setString(~miusuario ++ ": "++ ~mip ++ "\n" ++ ~uid.join("\n"),0);
 		~usrlist.setStringColor(Color.red,0,~miusuario.size);//colorea miusuario
-		~msgmenu.items = ~uid;
+		~msgmenu.items = ~uid;//agrega a la lista de mensajes directos
 	},{"Connect first, please.".warn;});
 });
 //ventana de entrada

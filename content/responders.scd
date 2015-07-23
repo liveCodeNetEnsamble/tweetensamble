@@ -15,15 +15,16 @@ OSCdef(\usrs, { |msg, time, addr, recvPort|
 			}.defer(0.1);
 			~msgit = ~uid.size-1;
 			},{
-				var index = ~uid.find([nil]);
 				var vivo = ~othersip.find([msg[2]]);
-				vivo.postcln;
+				if(vivo == nil,{
+				var index = ~uid.find([nil]);
 					~uid.put(index,[msg[1],msg[2]].join(": "));//une nombre + ip
 					~othersip.put(index,msg[2]);//agrega solo IP en mismo index que lista
 					{(~url +/+ "gui/tweetensamble_input_gui.scd").load;
 						~intxt.front;
 						~textoin.string = "User " ++ "'" ++ msg[1] ++ "'" ++ " was added to the list";
 					}.defer(0.1);
+				},){("no agregare otra vez a " ++ msg[1]).postcln;};
 		});
 	},{
 			//"ya no me auto agrego".postln
