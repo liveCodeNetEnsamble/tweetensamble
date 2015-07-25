@@ -1,7 +1,9 @@
+//=======================================
 //LiveCodeNet Ensamble
 //crea, coolabora, comparte tus SCtweets
-//
 //GUI componer y compartir
+//=======================================
+
 (
 ~w = Window("TweetEnsamble - Collaborative sctweets",Rect.aboutPoint(Window.screenBounds.center,295,220),false,scroll:false).front;
 //SCTweet
@@ -364,5 +366,13 @@
 //
 "\nGUI Ok!".inform;
 );
+
 // Font.availableFonts
 // Help.gui;
+/*
+// proxima rutina para mandar bundle
+// puede ir en el boton de connect-disconnect
+~rutina=Routine{loop{"hola".postln;0.25.wait}}
+~rutina.play;
+~rutina.stop;
+*/
