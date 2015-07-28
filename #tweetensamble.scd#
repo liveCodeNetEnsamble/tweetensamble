@@ -4,13 +4,13 @@
 // Se necesita conexión a internet
 //==========================================
 
-// Evalua la siguiente función:
+// Evalua la siguiente función, antes cambia la ruta de tweetensamble:
+
 (
 s.waitForBoot {
-// 1. Configura la ruta del directorio de 'tweetensamble'//
+// 1. Cambia la ruta del directorio de /tweetensamble a donde lo clonaste
 	~url="/home/hernani/tweetensamble/";
-// 2. Evalua la función //
-// No edites la siguiente línea de código //
+// No edites la siguiente línea de código
 	(~url ++ "content/load.scd").load;
 	}
 );

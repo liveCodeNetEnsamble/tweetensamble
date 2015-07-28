@@ -369,10 +369,23 @@
 
 // Font.availableFonts
 // Help.gui;
+
 /*
-// proxima rutina para mandar bundle
-// puede ir en el boton de connect-disconnect
-~rutina=Routine{loop{"hola".postln;0.25.wait}}
+// Rutina para mandar bundle
+//declarar rutina después que fue declarado ~n
+~rutina=Routine{
+loop{~n.sendBundle(0.1,['/ensamble',~miusuario,~mip,~puerto]);
+0.25.wait};
+};
+
+// poner en ~conecta.states
+// connect activa
 ~rutina.play;
+
+// disconnect desactiva
 ~rutina.stop;
 */
+
+
+
+
