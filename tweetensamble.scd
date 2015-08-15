@@ -15,4 +15,3 @@ s.waitForBoot {
 	}
 );
 //
-OSCdef.trace(false)
