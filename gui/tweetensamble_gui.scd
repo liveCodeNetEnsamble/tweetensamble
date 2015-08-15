@@ -109,6 +109,7 @@
         ]);
 ~conecta.action_({|butt|
 	if(butt.value == 0, { //resetea valores de usuario
+		~rutina.stop;//deja de enviar senales de vida
 		~usrlist.string  = "";
 		~texto.string = "You've been disconnected from ensamble list + your code deleted";
 		~textoin.string = "You've been disconnected from ensamble list + your code deleted";
@@ -133,6 +134,7 @@
 				~textoin.string = wcon;
 				~numtxt.value = ~texto.string.size;
 				~conecta.value = 0});
+		~rutina.play;//estoy vivo par alos demas
 	});
 });
 //botones
@@ -369,23 +371,3 @@
 
 // Font.availableFonts
 // Help.gui;
-
-/*
-// Rutina para mandar bundle
-//declarar rutina después que fue declarado ~n
-~rutina=Routine{
-loop{~n.sendBundle(0.1,['/ensamble',~miusuario,~mip,~puerto]);
-0.25.wait};
-};
-
-// poner en ~conecta.states
-// connect activa
-~rutina.play;
-
-// disconnect desactiva
-~rutina.stop;
-*/
-
-
-
-

@@ -22,17 +22,18 @@ OSCdef(\usrs, { |msg, time, addr, recvPort|
 				if(vivo == nil,{
 				var index = ~uid.find([nil]);
 					~uid.put(index,[msg[1],msg[2]].join(": "));//une nombre + ip
-					~othersip.put(index,msg[2]);//agrega solo IP en mismo index que lista
+					~othersip.put(index,msg[2]);//agrega solo IP en mismo index que ~uid
 					{(~url +/+ "gui/tweetensamble_input_gui.scd").load;
 						~intxt.front;
 						~textoin.string = "User " ++ "'" ++ msg[1] ++ "'" ++ " was added to the list";
 					}.defer(0.1);
-				},){("no agregare otra vez a " ++ msg[1]).postcln;};
+					1.do{5.wait;~intxt.close};//prueba -> cierra la ventana de aviso a los 5 segundos
+				},/*{("no agregare otra vez a " ++ msg[1]).postcln;};*/);
 		});
 	},{
 			//"ya no me auto agrego".postln
 	});
-	~msgit = ~msgit - 1;
+	~msgit = ~msgit - 2;
 },'/ensamble').fix;
 
 // Elimina usuario al desconectarse

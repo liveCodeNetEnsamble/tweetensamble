@@ -36,6 +36,7 @@
 //aqui las rutas de los archivos ligados al arranque
 (~url ++ "content/net_config.scd").load;
 (~url ++ "content/responders.scd").load;
+(~url ++ "content/functions.scd").load;
 (~url ++ "gui/tweetensamble_input_gui.scd").load;
 //(~url ++ "gui/login_gui.scd").load;
 (~url ++ "gui/tweetensamble_gui.scd").load;
