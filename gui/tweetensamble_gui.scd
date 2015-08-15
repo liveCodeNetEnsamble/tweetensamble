@@ -133,8 +133,9 @@
 				~texto.string = wcon;
 				~textoin.string = wcon;
 				~numtxt.value = ~texto.string.size;
-				~conecta.value = 0});
-		~rutina.play;//estoy vivo par alos demas
+				~conecta.value = 0;
+		});
+		~rutina.reset.play;//estoy vivo para los demas
 	});
 });
 //botones
