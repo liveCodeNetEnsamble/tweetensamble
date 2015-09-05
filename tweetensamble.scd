@@ -14,5 +14,3 @@ s.waitForBoot {
 	(~url ++ "content/load.scd").load;
 	}
 );
-//
-OSCdef.trace(false);

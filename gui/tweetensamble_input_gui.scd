@@ -1,6 +1,9 @@
-//LiveCodeNet Ensamble
-//crea, coolabora, comparte tus SCtweets
-////GUI que recibe los mensajes de los usuarios
+// ==========================================
+// LiveCodeNet Ensamble
+// crea, coolabora, comparte tus SCtweets
+// ==========================================
+
+// GUI que recibe los mensajes de los usuarios
 (
 ~intxt = Window("TweetEnsamble - input",Rect.aboutPoint(Window.screenBounds.center,240,60),false,true,scroll:false);
 //texto de entrada
