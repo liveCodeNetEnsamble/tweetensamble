@@ -4,7 +4,9 @@
 //////////////////////////////////////
 //estoy vivo
 ~rutina=Routine{
-	loop{~n.sendBundle(0.1,['/ensamble',~miusuario,~mip,~puerto]);
-		0.5.wait};
+	loop{
+		~n.sendBundle(0.1,['/ensamble',~miusuario,~mip,~puerto]);
+		0.5.wait
+	};
 };
 //

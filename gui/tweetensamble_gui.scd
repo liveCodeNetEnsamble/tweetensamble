@@ -119,7 +119,7 @@
 		~miusuario=nil;
 	});
 	if(butt.value == 1, {
-		if(~miusuario != nil,{
+		if(~miusuario != nil || ~mip != nil ,{
 			~n.sendBundle(0.1,['/ensamble',~miusuario,~mip,~puerto]);//envia tu nombre, ip, puerto a los demas
 			~usrlist.setString(~miusuario ++ ": "++ ~mip ++ "\n" ++ ~uid.join("\n"),0); //enlista usr con las ips conectadas
 			~msgmenu.items = ~uid; //  enlista los usuarios en el menu de mensaue
@@ -127,6 +127,7 @@
 			~texto.string = "Compose and share your SCTweets";
 			~textoin.string = "Compose and share your SCTweets";
 			~numtxt.value = ~texto.string.size;
+			~rutina.reset.play;//estoy vivo para los demas
 			},{
 				var wcon = "Must set an 'IP' and 'Username' in order to connect";
 				4.do{wcon.warn};
@@ -135,7 +136,6 @@
 				~numtxt.value = ~texto.string.size;
 				~conecta.value = 0;
 		});
-		~rutina.reset.play;//estoy vivo para los demas
 	});
 });
 //botones
@@ -149,7 +149,7 @@
 		~usrlist.setString(~miusuario ++ ": "++ ~mip ++ "\n" ++ ~uid.join("\n"),0);
 		~usrlist.setStringColor(Color.red,0,~miusuario.size);//colorea miusuario
 		~msgmenu.items = ~uid;//agrega a la lista de mensajes directos
-		~n.sendBundle(0.1,['/ensamble',~miusuario,~mip,~puerto]); // manda status de conexion
+		//~n.sendBundle(0.1,['/ensamble',~miusuario,~mip,~puerto]); // manda status de conexion
 	},{"Connect first, please.".warn;});
 });
 //ventana de entrada

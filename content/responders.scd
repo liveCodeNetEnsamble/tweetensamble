@@ -27,7 +27,7 @@ OSCdef(\usrs, { |msg, time, addr, recvPort|
 						~intxt.front;
 						~textoin.string = "User " ++ "'" ++ msg[1] ++ "'" ++ " was added to the list";
 					}.defer(0.1);
-					1.do{5.wait;~intxt.close};//prueba -> cierra la ventana de aviso a los 5 segundos
+					//1.do{5.wait;~intxt.close};//prueba -> cierra la ventana de aviso a los 5 segundos
 				},/*{("no agregare otra vez a " ++ msg[1]).postcln;};*/);
 		});
 	},{
