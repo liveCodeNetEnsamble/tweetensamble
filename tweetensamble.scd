@@ -9,10 +9,10 @@
 (
 s.waitForBoot {
 // 1. Cambia la ruta del directorio de /tweetensamble a donde lo clonaste
-	~url="/home/josecao5/Documents/Repos/tweetensamble/";
+	~url="/home/josecaos/Documents/tweetensamble/";
 // No edites la siguiente línea de código
 	(~url ++ "content/load.scd").load;
 	}
 );
 //
-OSCdef.trace(false)
+OSCdef.trace(false);
