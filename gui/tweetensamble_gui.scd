@@ -117,6 +117,8 @@
 		~n.sendBundle(0.2,['/desconecta',~miusuario,~mip]);// envio mis datos para borrar de la lista de los demas
 		~mip=nil;
 		~miusuario=nil;
+		~uid = Array.newClear(~numusr -1);
+		~othersip = Array.newClear(~numusr -1);
 	});
 	if(butt.value == 1, {
 		if(~miusuario != nil || ~mip != nil ,{
@@ -362,6 +364,8 @@
 	"window is closed, you've been disconnected".inform;
 	~uid = Array.newClear(~numusr -1);
 	~othersip = Array.newClear(~numusr -1);
+	~mip=nil;
+	~miusuario=nil;
 	~n.sendBundle(0.2,['/off',~mip,~miusuario]);
 	~msgit=0;
 	Server.freeAll;

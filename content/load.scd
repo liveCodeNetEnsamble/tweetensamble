@@ -31,7 +31,7 @@
 ~uurl = [];//array usuarios
 ~tituloweb = nil;//titulo WebView
 //twitter
-~server = "tweetensamble.mixfuckedup.net";
+~server = nil;//"tweetensamble.mixfuckedup.net";
 ////////terminan variables globales/////////////
 //aqui las rutas de los archivos ligados al arranque
 (~url ++ "content/net_config.scd").load;
