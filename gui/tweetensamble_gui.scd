@@ -287,6 +287,7 @@
 			~comparte = ~othersip[~msgmenu.value];// relaciona array de lista con array de IP
 			(~url ++ "gui/tweetensamble_out_gui.scd").load;
 			~outmsg.front;
+			~direct=NetAddr(~comparte.asString,~puerto);//
 		});
 		if(val.value == 2,{~direct.sendBundle(0.1,['/directo',~textout.string,~miusuario,"uno"]);//envia mensaje con id
 		});
