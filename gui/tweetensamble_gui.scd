@@ -204,7 +204,7 @@
         .action_({|butt|
 		if(butt.value == 0, {
 		  var texto =  ~texto.select(0,140);
-		 ~n.sendBundle(0.001,['\evaltodos',0,texto.selectedString,~miusuario,~mip]);//envia el codigo y despues evaluarlo
+		 ~n.sendBundle(0.01,['\evaltodos',0,texto.selectedString,~miusuario,~mip]);//envia el codigo como un string
 		});
 	});
 //
@@ -331,10 +331,11 @@
         ]);
 ~outsct.action_({|val|
 	if(val.value == 1,{
+		~server = "tweetensamble.mixfuckedup.net";
 		(~url ++ "gui/login_gui.scd").load;
 		~web.front;
 		//~server = "tweetensamble.mixfuckedup.net";
-		{~web.name=~browser.title}.defer(3);
+		{~web.name=~browser.title}.defer(2);
 		},{
 			~web.close
 		}
