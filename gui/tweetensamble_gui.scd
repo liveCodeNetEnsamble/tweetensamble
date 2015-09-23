@@ -332,7 +332,7 @@
 ~outsct.action_({|val|
 	if(val.value == 1,{
 		~server = "tweetensamble.mixfuckedup.net";
-		(~url ++ "gui/login_gui.scd").load;
+		[(~url ++ "content/net_config.scd"),(~url ++ "gui/login_gui.scd")].load;
 		~web.front;
 		//~server = "tweetensamble.mixfuckedup.net";
 		{~web.name=~browser.title}.defer(2);
