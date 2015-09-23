@@ -93,8 +93,8 @@ OSCdef(\mensaje,{|msg, time, addr, recvPort|
 OSCdef(\evaltodos,{|msg,time,addr,recvPort|
 	var usr = msg[3];
 	if(msg[1] == 0, {
-		msg[2].postcln;
-	    msg[2].interpretPrint;
+		//msg[2].postcln;
+	    msg[2].interpret;//si no fuciona usar .asString antes de interpret
 		{
 			(~url +/+ "gui/tweetensamble_input_gui.scd").load;
 			~intxt.front;
