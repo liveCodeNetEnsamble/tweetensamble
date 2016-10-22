@@ -8,9 +8,8 @@
 
 (
 s.waitForBoot {
-// 1. Cambia la ruta del directorio de /tweetensamble a donde lo clonaste
-	~url="/home/josecaos/Documents/tweetensamble/";
-// No edites la siguiente línea de código
+	~url = thisProcess.nowExecutingPath.dirname;
+//
 	(~url ++ "content/load.scd").load;
 	}
 );
