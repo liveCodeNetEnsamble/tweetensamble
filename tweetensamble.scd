@@ -9,7 +9,6 @@
 (
 s.waitForBoot {
 	~url = thisProcess.nowExecutingPath.dirname;
-//
-	(~url ++ "content/load.scd").load;
+	(~url +/+ "content/load.scd").load
 	}
 );
