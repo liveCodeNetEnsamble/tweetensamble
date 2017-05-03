@@ -332,8 +332,8 @@
 ~outsct.action_({|val|
 	if(val.value == 1,{
 		~server = "tweetensamble.mixfuckedup.net";
-		(~url ++ "content/net_config.scd").load;
-		(~url ++ "gui/login_gui.scd").load;
+		(~url +/+ "content/net_config.scd").load;
+		(~url +/+ "gui/login_gui.scd").load;
 		~web.front;
 		//~server = "tweetensamble.mixfuckedup.net";
 		{~web.name=~browser.title}.defer(2);
@@ -374,7 +374,7 @@
 	Server.freeAll;
 };
 //
-"\nGUI Ok!".inform;
+"\n GUI Ok!".inform;
 );
 
 // Font.availableFonts
