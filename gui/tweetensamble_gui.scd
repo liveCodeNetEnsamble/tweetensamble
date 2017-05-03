@@ -162,7 +162,7 @@
         ]);
 ~inputxt.action_({|val|
 	if(val.value == 1,{
-		(~url ++ "gui/tweetensamble_input_gui.scd").load;
+		(~url +/+ "gui/tweetensamble_input_gui.scd").load;
 		~notas.front;
 	},{~notas.close})};
 );
@@ -250,9 +250,9 @@
         .action_({|butt|
 		if(butt.value == 0, {
 			~texto.select(0,140);//por si el texto se deselecciona antes de enviar
-			n=~url ++ "sctweets/MySCTweet" ++ ~fileit ++ ".scd";
+			n=~url +/+ "sctweets/MySCTweet" ++ ~fileit ++ ".scd";
 			a=File(n,"w");
-			a.write("//done with tweetwensamble by " ++ ~miusuario ++ "\n" ++ ~texto.selectedString ++ "\n" ++ "//2015");
+			a.write("// done with tweetwensamble by " ++ ~miusuario ++ "\n" ++ ~texto.selectedString ++ "\n" ++ "//2015");
 			a.close;
 			~fileit = ~fileit+1;
 			{(~url +/+ "gui/tweetensamble_input_gui.scd").load;
@@ -285,7 +285,7 @@
 	if(~conecta.value != 0,{//
 		if(val.value == 1,{
 			~comparte = ~othersip[~msgmenu.value];// relaciona array de lista con array de IP
-			(~url ++ "gui/tweetensamble_out_gui.scd").load;
+			(~url +/+ "gui/tweetensamble_out_gui.scd").load;
 			~outmsg.front;
 			~direct=NetAddr(~comparte.asString,~puerto);// reevalua variable lista usuarios para mensaje
 		});
@@ -311,7 +311,7 @@
         ]);
 ~outxtall.action_({|val|
 	if(~conecta.value != 0,{
-		if(val.value == 1,{(~url ++ "gui/tweetensamble_out_gui.scd").load;~outmsg.front;
+		if(val.value == 1,{(~url +/+ "gui/tweetensamble_out_gui.scd").load;~outmsg.front;
 		});
 		if(val.value == 2,{~n.sendBundle(0.5,["/directo",~textout.string,~miusuario,"todos"]);//envia mensaje con id
 		});
