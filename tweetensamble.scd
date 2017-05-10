@@ -4,7 +4,7 @@
 // Se necesita conexión a internet
 //==========================================
 
-// Evalua la siguiente función, antes cambia la ruta de tweetensamble:
+// Evalúa la siguiente función:
 
 (
 s.waitForBoot {

@@ -48,7 +48,7 @@ OSCdef(\exit, { |msg, time, addr, recvPort|
 	index = ~othersip.find([msg[2]]); //~uid.find([msg[1],msg[2]].join(": "));//busca en el array de usuarios -> [ursname: ip]
 		//if(index != nil,{
 			~othersip.put(index,nil);
-			~uid.put(index,nil);
+			~uid.put(index,nil);//cambiar por  string "waiting for user ..."
 		//});
 },'/desconecta').fix;
 

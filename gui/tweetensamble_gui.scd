@@ -331,7 +331,7 @@
         ]);
 ~outsct.action_({|val|
 	if(val.value == 1,{
-		~server = "tweetensamble.mixfuckedup.net";
+		~server = "tweetensamble.josecaos.xyz";
 		(~url +/+ "content/net_config.scd").load;
 		(~url +/+ "gui/login_gui.scd").load;
 		~web.front;
